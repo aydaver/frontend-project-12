@@ -1,16 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './authorization/login.jsx';
 import { Container, Row, Col, Image } from 'react-bootstrap';
-import meme from './assets/404.gif'
+import meme from './assets/404.gif';
 
-const App = () =>{
-
+const App = () => {
   const NotFound = () => {
     return (
       <Container fluid>
         <Row>
           <Col></Col>
-          <Col fluid>
+          <Col>
             <Image src={meme} alt="404 not found"/>
           </Col>
           <Col></Col>
@@ -25,32 +24,33 @@ const App = () =>{
       </Container>
     )
   }
+  const PrivateRoute = ({ children }) => {
+    const token = localStorage.getItem("token");
+  
+    return token ? children : <Navigate to="/login" />;
+  };
+  
+  const AuthPage = () => {
+    return <Login />
+  }
 
   const MainPage = () => {
-    return <div>
-      <h1>There's will be a main page</h1>
-    </div>
+    return <h1>There's will be a main page</h1>
   }
-
-  const AuthPage = () => {
-    return (
-      <div className="w-100">
-        <Login />
-      </div>
-    )
-  }
-
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<NotFound />} />
-        <Route path="" element={<MainPage />} />
-        <Route path="login" element={<AuthPage />} />
+        <Route path="/" element={<PrivateRoute>
+                                  <MainPage />
+                                </PrivateRoute>}/>
+        <Route path="login" element={<AuthPage/>}/>
         <></>
       </Routes>
     </BrowserRouter>
   );
+  
 }
 
 export default App;
