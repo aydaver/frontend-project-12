@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage as Error } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import React, { useState } from 'react';
 import { Button, Container, Row, Col, Image } from 'react-bootstrap';
 import auth from '../../assets/auth.jpg'
