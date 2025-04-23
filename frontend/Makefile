@@ -1,4 +1,6 @@
 build: 
-	npm run build
+	npm run dev
 start:
-	npx start-server -s frontend/dist
+	npx start-server
+install: 
+	npm i

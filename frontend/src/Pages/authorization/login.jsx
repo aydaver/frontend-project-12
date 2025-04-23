@@ -1,30 +1,34 @@
 import { Formik, Form, Field } from 'formik';
 import React, { useState } from 'react';
-import { Button, Container, Row, Col, Image } from 'react-bootstrap';
-import auth from '../../assets/auth.jpg'
+import { Button, Container, Row, Col, Image, Spinner } from 'react-bootstrap';
+import authOff from '../../assets/authOff.jpg'
+import authOn from '../../assets/authOn.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import CommonHeader from '../CommonComponents/commonHeader';
 
 const Login = () => {
+
     const [ errorState, handleError ] = useState();
+
+    const [image, setImage] = useState(authOff);
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSubmit = () => {
+        setIsLoading(true);
+    }
 
     const navigate = useNavigate();
 
     return (
         <Container className='bg-black mw-100 h-100 my-0 px-0' sm={12} lg={12}>
-            <Row className='py-3 mt-0 shadow-sm bg-white' sm={12} lg={12}>
-                <Col sm={1} lg={1}></Col>
-                <Col className="justify-content-center" sm={7} lg={7}>
-                    <h5 className="fw-light my-0 py-20">Aydaver Chat</h5>
-                </Col>
-                <Col sm={2} lg={2}></Col>
-                <Col sm={2} lg={2}></Col>
-            </Row>
+            <CommonHeader />
             <Row className="middle justify-content-center align-content-center h-100 pb-0 bg-light" sm={12} lg={12}>
                 <Col className="bg-white rounded border border-secondary pt-5 shadow-sm" sm={8} lg={8}>
                     <Row className="middle-form" sm={12} lg={12}>
                         <Col className="middle-image justify-content-center d-flex align-items-center px-0 mx-0" sm={6} lg={6}>
-                            <Image src={auth} alt="login image" height='300' width="300" roundedCircle />
+                            <Image src={image} alt="login image" height='300' width="300" roundedCircle />
                         </Col>
                         <Col className="middle-inputs px-5" sm={6} lg={6}>
                             <h1 className='text-center'>Войти</h1>
@@ -34,12 +38,18 @@ const Login = () => {
                                     password: '',
                                 }}
                                 onSubmit={async (values) => {
-                                    localStorage.removeItem('token');
+                                    handleSubmit();
                                     try {
                                         await axios.post('/api/v1/login', { username: values.userName , password: values.password }).then(
                                             (response) => {
-                                            localStorage.setItem('token', response.data.token);
-                                            navigate("/");
+                                                setTimeout(() => {
+                                                    setImage(authOn);
+                                                }, 500)
+                                            setTimeout(() => {
+                                                localStorage.setItem('token', response.data.token);
+                                                localStorage.setItem('username', response.data.username)
+                                                navigate("/")
+                                            }, 1000);
                                         });
                                     } catch (error){
                                         if (error.status === 401) {
@@ -62,7 +72,23 @@ const Login = () => {
                                                 <label htmlFor="password">Пароль</label>
                                                 <Field type="password" name="password" className="form-control"/>
                                             </div>
-                                            <Button className="w-100 my-5" type='submit'>Войти</Button>
+                                            <Button type="submit" className='w-100 mt-5' disabled={isLoading}>
+                                                {isLoading ? (
+                                                <>
+                                                    <Spinner
+                                                    as="span"
+                                                    animation="border"
+                                                    size="sm"
+                                                    role="status"
+                                                    aria-hidden="true"
+                                                    className="me-2"
+                                                    />
+                                                    Вход...
+                                                </>
+                                                ) : (
+                                                'Войти'
+                                                )}
+                                            </Button>
                                         </Form>
                                     </div>
                                 )}

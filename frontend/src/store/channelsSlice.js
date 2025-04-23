@@ -41,13 +41,13 @@ const channelsSlice = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(fetchChannels.pending, (state) => {
-            state.status = 'loading';
+            state.status = 'loading channels';
             state.error = null;
             console.log(state.status)
         });
 
         builder.addCase(fetchChannels.fulfilled, (state, action) => {
-            state.status = 'permission accepted';
+            state.status = 'permission accepted for channels';
             state.channels = action.payload.map((channel) => ({...channel, key: uniqueId()}));
             console.log(state.status);
         });
