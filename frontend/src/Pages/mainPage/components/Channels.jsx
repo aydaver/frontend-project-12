@@ -1,16 +1,18 @@
 import { useSelector } from "react-redux";
 import { fetchChannels } from "../../../store/channelsSlice";
 import { useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Nav, Tab, Button } from 'react-bootstrap';
 import Messages from "./Messages";
 
 const Channels = () => {
    const dispatch = useDispatch();
 
+   const [activeChannelId, setActiveChannelId] = useState('general');
+
     useEffect(() => {
         dispatch(fetchChannels())
-    }, [dispatch])
+    }, []);
     
     const channels = useSelector(state => state.channels.channels);
 
@@ -20,7 +22,7 @@ const Channels = () => {
                 <Col sm={8}>
                     <Row className="h-100 bg-light shadow rounded justify-content-center" sm={12}>
                         <Col sm={12}>
-                            <Tab.Container className="d-flex w-100" id="left-tabs-example" defaultActiveKey="general">
+                            <Tab.Container className="d-flex w-100" id="left-tabs-example" defaultActiveKey={activeChannelId}>
                                 <Row className="h-100" sm={12}>
                                     <Col className="rounded-left border-end h-100" sm={3}>
                                         <div className="d-flex my-4 justify-content-between align-content-center">
@@ -28,7 +30,7 @@ const Channels = () => {
                                             <Button>+</Button>
                                         </div>
                                         <Nav variant="pills" className="flex-column w-100">
-                                            {channels.map((channel) => <Nav.Link className="w-100" key={channel.name} eventKey={channel.name}>{channel.name}</Nav.Link>)}
+                                            {channels.map((channel) => <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100" key={channel.name} eventKey={channel.name}>{channel.name}</Nav.Link>)}
                                         </Nav>
                                     </Col>
                                     <Col className="bg-white" sm={9}>
@@ -43,7 +45,9 @@ const Channels = () => {
                                                             </div>
                                                         </Row>
                                                         <Row>
-                                                            <Messages currentChannelId={channel.id}/>
+                                                            {activeChannelId === channel.id && (
+                                                                <Messages channelId={channel.id} />
+                                                            )}
                                                         </Row>
                                                     </div>
                                                 </Tab.Pane>

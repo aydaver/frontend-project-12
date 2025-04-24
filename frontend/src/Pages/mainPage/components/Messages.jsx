@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { io } from "socket.io-client";
-import { addMessage, clearMessages } from '../../../store/messagesSlice';
+import { addMessage, clearMessages, fetchMessages } from '../../../store/messagesSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -20,8 +20,13 @@ const Messages = (props) => {
   };
 
   const messages = useSelector((state) =>
-    state.messages.messages
+    state.messages.messages.filter((message) => message.channelId === props.channelId)
   );
+
+  useEffect(() => {
+          dispatch(fetchMessages())
+      }, []);
+      
 
   const handleSubmit = (e) => { 
       e.preventDefault();
@@ -30,7 +35,7 @@ const Messages = (props) => {
 
       const newMessage = {
         body: text,
-        channelId: props.currentChannelId,
+        channelId: props.channelId,
         username: localStorage.getItem('username'),
       };
 
@@ -57,15 +62,15 @@ const Messages = (props) => {
       socket.off('newMessage');
     };
     
-  }, [handleSubmit]);
+  }, []);
 
   return (
     <div>
-      <ul>
+      <ul style={{listStyleType: 'none', paddingLeft: 0}}>
         {messages.map((message) => (
           <li key={message.id}>
             <span className="d-flex">
-              <h5>{message.username}</h5>
+              <h5 style={{marginRight: '1rem'}}>{`${message.username}:`}</h5>
               <p>{message.body}</p>
             </span>
           </li>

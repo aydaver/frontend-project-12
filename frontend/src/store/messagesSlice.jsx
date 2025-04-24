@@ -1,10 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { uniqueId } from 'lodash';
 
 export const fetchMessages = createAsyncThunk(
 
-    'channels/fetchMessages',
+    'messages/fetchMessages',
     async () => {
        const response = await axios.get('/api/v1/messages', {
         headers: {
@@ -40,7 +39,7 @@ const messagesSlice = createSlice({
   
           builder.addCase(fetchMessages.fulfilled, (state, action) => {
               state.status = 'permission accepted for messages';
-              state.messages = action.payload.map((message) => ({...message, key: uniqueId()}));
+              state.messages = action.payload.map((message) => ({...message, key: message.id}));
               console.log(state.status);
           });
   
