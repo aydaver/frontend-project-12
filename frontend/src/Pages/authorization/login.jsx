@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage as Error } from 'formik';
 import React, { useState } from 'react';
 import { Button, Container, Row, Col, Image, Spinner } from 'react-bootstrap';
 import authOff from '../../assets/authOff.jpg'
@@ -53,6 +53,9 @@ const Login = () => {
                                         });
                                     } catch (error){
                                         if (error.status === 401) {
+                                            setTimeout(() => {
+                                                setIsLoading(false);
+                                            }, 500)
                                             handleError('InValid User, Try Again.');
                                         }
                                     }
@@ -65,12 +68,14 @@ const Login = () => {
                                             <div className="form-group">
                                                 <label htmlFor="userName">Ваш ник</label>
                                                 <Field type="userName" id="userName" name="userName" className="form-control"/>
+                                                <Error name="userName">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                                 <p className='text-danger'>{errorState}</p>
                                             </div>
                                             <div style={{height: '20px'}}></div>
                                             <div className="form-group">
                                                 <label htmlFor="password">Пароль</label>
                                                 <Field type="password" name="password" className="form-control"/>
+                                                <Error name="password">{(error) => <span>{error}</span>}</Error>
                                             </div>
                                             <Button type="submit" className='w-100 mt-5' disabled={isLoading}>
                                                 {isLoading ? (

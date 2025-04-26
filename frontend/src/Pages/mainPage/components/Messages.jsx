@@ -40,15 +40,16 @@ const Messages = (props) => {
         username: localStorage.getItem('username'),
       };
 
-      axios.post('/api/v1/messages', newMessage, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      if(text.trim() !== '') {
+        axios.post('/api/v1/messages', newMessage, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+      }
 
       setText('');
-
-      console.log(messages);
   }
 
   useEffect(() => {
@@ -66,20 +67,20 @@ const Messages = (props) => {
   }, []);
 
   return (
-    <div className="h-100">
-      <div className="h-100 overflow-auto">
+    <div className="h-100 d-flex flex-column">
+      <div className="overflow-auto flex-grow-1 px-3 pt-3 pb-0">
         <ul style={{listStyleType: 'none', paddingLeft: 0}}>
           {filteredMessages.map((message) => (
             <li key={message.id}>
               <span className="d-flex">
-                <h5 style={{marginRight: '1rem'}}>{`${message.username}:`}</h5>
-                <p>{message.body}</p>
+                <h5 className="pe-1 mb-0 pt-1">{`${message.username}:`}</h5>
+                <p className="mb-0 align-content-end">{message.body}</p>
               </span>
             </li>
           ))}
         </ul>
       </div>
-      <form onSubmit={handleSubmit} className="d-flex">
+      <form onSubmit={handleSubmit} className="d-flex border-top p-2">
         <input
           className="form-control me-2"
           value={text}
