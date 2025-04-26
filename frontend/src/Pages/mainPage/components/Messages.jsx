@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { io } from "socket.io-client";
-import { addMessage, clearMessages, fetchMessages } from '../../../store/messagesSlice';
+import { addMessage, fetchMessages } from '../../../store/messagesSlice';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 
 const Messages = (props) => {
@@ -11,17 +11,18 @@ const Messages = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleClear = () => {
-    dispatch(clearMessages());
-  };
 
   const handleText = (e) => {
     setText(e.target.value);
   };
 
   const messages = useSelector((state) =>
-    state.messages.messages.filter((message) => message.channelId === props.channelId)
+    state.messages.messages
   );
+
+  const filteredMessages = useMemo(() => {
+    return messages.filter((message) => message.channelId === props.channelId);
+  }, [messages, props.channelId]);
 
   useEffect(() => {
           dispatch(fetchMessages())
@@ -65,27 +66,29 @@ const Messages = (props) => {
   }, []);
 
   return (
-    <div>
-      <ul style={{listStyleType: 'none', paddingLeft: 0}}>
-        {messages.map((message) => (
-          <li key={message.id}>
-            <span className="d-flex">
-              <h5 style={{marginRight: '1rem'}}>{`${message.username}:`}</h5>
-              <p>{message.body}</p>
-            </span>
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
+    <div className="h-100">
+      <div className="h-100 overflow-auto">
+        <ul style={{listStyleType: 'none', paddingLeft: 0}}>
+          {filteredMessages.map((message) => (
+            <li key={message.id}>
+              <span className="d-flex">
+                <h5 style={{marginRight: '1rem'}}>{`${message.username}:`}</h5>
+                <p>{message.body}</p>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <form onSubmit={handleSubmit} className="d-flex">
         <input
+          className="form-control me-2"
           value={text}
           onChange={handleText}
           type="text"
           placeholder="Введите сообщение"
         />
-        <button type="submit">Отправить</button>
+        <button type="submit" className="btn btn-primary">Отправить</button>
       </form>
-      <button onClick={handleClear}>Clear</button>
     </div>
   );
 };

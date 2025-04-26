@@ -25,8 +25,8 @@ const messagesSlice = createSlice({
     addMessage: (state, action) => {
       state.messages.push(action.payload);
     },
-    clearMessages: (state) => {
-      state.messages = [];
+    clearMessagesById: (state, action) => {
+      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id)
     },
   },
   extraReducers: (builder) => {
@@ -34,22 +34,19 @@ const messagesSlice = createSlice({
           builder.addCase(fetchMessages.pending, (state) => {
               state.status = 'loading messages';
               state.error = null;
-              console.log(state.status)
           });
   
           builder.addCase(fetchMessages.fulfilled, (state, action) => {
               state.status = 'permission accepted for messages';
               state.messages = action.payload.map((message) => ({...message, key: message.id}));
-              console.log(state.status);
           });
   
           builder.addCase(fetchMessages.rejected, (state) => {
               state.status = 'permission denied';
-              console.log(state.status);
           });
       }
 });
 
-export const { addMessage, clearMessages } = messagesSlice.actions;
+export const { addMessage, clearMessagesById } = messagesSlice.actions;
 
 export default messagesSlice.reducer;

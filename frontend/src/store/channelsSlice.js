@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { uniqueId } from 'lodash';
 import axios from 'axios';
 
 export const fetchChannels = createAsyncThunk(
@@ -27,14 +26,14 @@ const channelsSlice = createSlice({
 
     reducers: { 
         addChannel(state, action) {
-            console.log(state);
-            console.log(action);
-            
             state.channels.push({
-                id: uniqueId(),
+                id: action.payload.id,
                 name: action.payload.name,
-                isActive: false,
+                removable: true,
             });
+        },
+        removeChannel(state, action) {
+            state.channels = state.channels.filter((channel) => channel.id !== action.payload.id)
         }
     },
 
@@ -43,22 +42,19 @@ const channelsSlice = createSlice({
         builder.addCase(fetchChannels.pending, (state) => {
             state.status = 'loading channels';
             state.error = null;
-            console.log(state.status)
         });
 
         builder.addCase(fetchChannels.fulfilled, (state, action) => {
-            state.status = 'permission accepted for channels';
-            state.channels = action.payload.map((channel) => ({...channel, key: uniqueId()}));
-            console.log(state.status);
+            state.status = 'channels loaded';
+            state.channels = action.payload.map((channel) => ({...channel, key: channel.id}));
         });
 
         builder.addCase(fetchChannels.rejected, (state) => {
             state.status = 'permission denied';
-            console.log(state.status);
         });
     }
 });
 
-export const { addChannel } = channelsSlice.actions;
+export const { addChannel, removeChannel } = channelsSlice.actions;
 
 export default channelsSlice.reducer;
