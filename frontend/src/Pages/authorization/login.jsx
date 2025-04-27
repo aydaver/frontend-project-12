@@ -6,6 +6,7 @@ import authOn from '../../assets/authOn.jpg'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CommonHeader from '../CommonComponents/commonHeader';
+import { schemas } from '../../Functions/validation';
 
 const Login = () => {
 
@@ -56,10 +57,11 @@ const Login = () => {
                                             setTimeout(() => {
                                                 setIsLoading(false);
                                             }, 500)
-                                            handleError('InValid User, Try Again.');
+                                            handleError('');
                                         }
                                     }
                                 }}
+                                validationSchema={schemas.login}
                             > 
                                 {() => (
                                     <div className="">
@@ -75,7 +77,7 @@ const Login = () => {
                                             <div className="form-group">
                                                 <label htmlFor="password">Пароль</label>
                                                 <Field type="password" name="password" className="form-control"/>
-                                                <Error name="password">{(error) => <span>{error}</span>}</Error>
+                                                <Error name="password">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                             </div>
                                             <Button type="submit" className='w-100 mt-5' disabled={isLoading}>
                                                 {isLoading ? (
@@ -101,8 +103,7 @@ const Login = () => {
                         </Col>
                         <Col className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100">
                             <p className="my-0">Нет аккаунта?</p>
-                            <div style={{width: '10px'}}></div>
-                            <a href="#">Регистрация</a>
+                            <Button className='my-0 pe-0 ps-2' variant='link' onClick={() => {navigate("/signup")}}>Регистрация</Button>
                         </Col>
                     </Row>
                 </Col>
