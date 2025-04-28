@@ -15,7 +15,8 @@ const password = Yup.string()
 const userName = Yup.string()
     .matches(regx.channelName, 'От 3 до 20 символов')
     .required('Обязательное поле')
-const passwordCheck = password;
+const passwordCheck = Yup.string()
+    .oneOf([Yup.ref('password'), null], ' Пароли должны совпадать')
 
 export const schemas = {
     channel: Yup.object().shape({

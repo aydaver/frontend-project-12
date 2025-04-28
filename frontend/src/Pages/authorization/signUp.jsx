@@ -18,10 +18,6 @@ const SignUp = () => {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = () => {
-        setIsLoading(true);
-    }
-
     const navigate = useNavigate();
 
     return (
@@ -42,7 +38,7 @@ const SignUp = () => {
                                     passwordCheck: '',
                                 }}
                                 onSubmit={async (values) => {
-                                    handleSubmit();
+                                    setIsLoading(true);
                                     if (values.password !== values.passwordCheck) {
                                         setErrorStateUser('')
                                         setErrorStatePassword('Пароли не совпадают');

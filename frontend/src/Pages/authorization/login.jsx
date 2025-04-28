@@ -10,15 +10,11 @@ import { schemas } from '../../Functions/validation';
 
 const Login = () => {
 
-    const [ errorState, handleError ] = useState();
+    const [ errorState, setError ] = useState();
 
     const [image, setImage] = useState(authOff);
 
     const [isLoading, setIsLoading] = useState(false);
-
-    const handleSubmit = () => {
-        setIsLoading(true);
-    }
 
     const navigate = useNavigate();
 
@@ -39,7 +35,8 @@ const Login = () => {
                                     password: '',
                                 }}
                                 onSubmit={async (values) => {
-                                    handleSubmit();
+                                    setIsLoading(true)
+                                    setError('')
                                     try {
                                         await axios.post('/api/v1/login', { username: values.userName , password: values.password }).then(
                                             (response) => {
@@ -57,7 +54,7 @@ const Login = () => {
                                             setTimeout(() => {
                                                 setIsLoading(false);
                                             }, 500)
-                                            handleError('');
+                                            setError('Неверные имя пользователя или пароль');
                                         }
                                     }
                                 }}
