@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +11,6 @@ const PrivateRoute = ({ children }) => {
         return children;
     } 
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => { 
         navigate('/login') 
     }, [navigate])

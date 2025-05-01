@@ -1,0 +1,127 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { fetchChannels, addChannel, removeChannel, renameChannel } from "../../Chat/model/channelsSlice";
+import { useDispatch } from 'react-redux';
+import { clearMessagesById } from "../../Chat/model/messagesSlice";
+import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
+import { Row, Col, Nav, Tab, Button } from 'react-bootstrap';
+import Messages from "./Messages";
+import AddChannelInput from "./additionalUI/ChannellInput";
+import ChannelBurgerElement from "./additionalUI/RemovableChannel";
+import DeleteAcceptModal from "./additionalUI/ConfirmModal";
+
+const Channels = () => {
+
+    const [formType, setFormType] = useState('add');
+
+    const [activeChannelId, setActiveChannelId] = useState('1');
+
+    const [isModalShown, setModalShown] = useState(false);
+
+    const [oldChannelName, setOldChannelName] = useState('');
+
+    const [isDeleteModalShown, setDeleteModalShown] = useState(false);
+
+    const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(fetchChannels())
+    }, []);
+
+
+    useEffect(() => {
+
+        const socket = io("ws://localhost:5002");
+    
+        socket.on('newChannel', (payload) => {
+            dispatch(addChannel(payload));
+            setActiveChannelId(payload.id)
+        });
+    
+        return () => {
+            socket.off('newChannel');
+        };
+        
+      }, []);
+
+    useEffect(() => {
+
+        const socket = io("ws://localhost:5002");
+
+        socket.on('removeChannel', (payload) => {
+            dispatch(removeChannel(payload));
+            dispatch(clearMessagesById(payload));
+            setActiveChannelId('1');
+        })
+
+    }, [])  
+
+    useEffect(() => {
+
+        const socket = io("ws://localhost:5002");
+
+        socket.on('renameChannel', (payload) => {
+            dispatch(renameChannel(payload));
+        });
+
+    }, []) 
+
+    const handleMessages = (channelId, channelName) => {
+        if (activeChannelId === channelId) {
+            return <Messages channelId={channelId} channelName={channelName}/>
+        }
+    }
+
+    const channels = useSelector(state => state.channels.channels);
+
+return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-example" defaultActiveKey={activeChannelId}>
+            <Row className="h-75 w-75 shadow rounded" sm={12} lg={12}>
+                <Col className="rounded-left border-end" sm={3} lg={3}>
+                    <div className="d-flex my-4 justify-content-between align-content-center">
+                        <h4 className="py-0 my-0" style={{height: '30px'}}>Каналы</h4>
+                        <Button className="btn btn-primary" onClick={() => {
+                            setFormType('add');
+                            setModalShown(true);
+                        }}>+</Button>
+                        <AddChannelInput close={() => setModalShown(false)} isShown={isModalShown} title="Добавить канал" buttonTitle="Добавить" formType={formType} channelId={activeChannelId} oldChannelName={oldChannelName}/>
+                    </div>
+                    <Nav variant="pills" className="flex-column w-100">
+                        {channels.map((channel) => {
+                            if (!channel.removable) {
+                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap" key={channel.id} eventKey={channel.id}>
+                                            {`# ${channel.name}`}
+                                        </Nav.Link>
+                            } else {
+                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 py-0 flex-wrap" key={channel.id} eventKey={channel.id}>
+                                            <ChannelBurgerElement handleFormTypeAndModal={() => {
+                                                setFormType('edit');
+                                                setModalShown(true);
+                                                setOldChannelName(channel.name);
+                                            }} 
+                                            handleDeleteAcceptModal={() => setDeleteModalShown(true)}
+                                            channelId={channel.id} 
+                                            activeChannelId={activeChannelId} 
+                                            channelName={channel.name}/>
+                                            <DeleteAcceptModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id}/>
+                                        </Nav.Link>
+                            }
+                        })
+                        }   
+                    </Nav>
+                </Col>
+                <Col className="bg-white h-100 px-0 rounded-end" sm={9} lg={9}>
+                    <Tab.Content className="h-100">
+                            {channels.map((channel) => 
+                            <Tab.Pane className="h-100" key={channel.id} eventKey={channel.id}> 
+                                    {handleMessages(channel.id, channel.name)}
+                            </Tab.Pane>
+                            )} 
+                    </Tab.Content>
+                </Col>
+            </Row>
+        </Tab.Container>
+}
+
+export default Channels;

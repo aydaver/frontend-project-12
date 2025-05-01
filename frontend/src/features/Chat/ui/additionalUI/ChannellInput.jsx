@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage as Error} from 'formik';
 import { Button, Modal } from "react-bootstrap";
-import { schemas } from "../../../Functions/validation";
+import { schemas } from "../../../Common/helpers/validation";
 import { useSelector } from "react-redux";
-import axios from "axios";
+import { channelPost, channelEdit } from "../../model/channelsApi";
 
-const AddChannelInput = (props) => {
+const ChannelInput = (props) => {
 
     const [errorStatus, setErrorStatus] = useState('');
 
-    const channelsExist = useSelector((state) => 
-        state.channels.channels
-    );
+    const channelsExist = useSelector((state) => state.channels.channels);
 
     const handleSubmit = async (values) => {
 
@@ -20,21 +18,13 @@ const AddChannelInput = (props) => {
         const newChannel = {name: values.channelName};
 
         if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
-            setErrorStatus('Должно быть уникальным')
+            setErrorStatus('Должно быть уникальным');
         } else {
             try {
                 if (props.formType === 'add') {
-                    await axios.post('/api/v1/channels', newChannel, {
-                        headers: {
-                        Authorization: `Bearer ${token}`,
-                        },
-                    });
+                    channelPost(newChannel, token)
                 } else if (props.formType === 'edit') {
-                    await axios.patch(`/api/v1/channels/${props.channelId}`, newChannel, {
-                        headers: {
-                        Authorization: `Bearer ${token}`,
-                        },
-                    });
+                    channelEdit(props.channelId, newChannel, token)
                 }
                 props.close();
                 setErrorStatus('');
@@ -46,7 +36,7 @@ const AddChannelInput = (props) => {
 
     return  <>
                 <Modal
-                    size="lg"
+                    size="md"
                     show={props.isShown}
                     onHide={() => props.close()}
                     aria-labelledby="example-modal-sizes-title-lg"
@@ -81,6 +71,6 @@ const AddChannelInput = (props) => {
                     </Modal.Body>
                 </Modal>
             </>
-        }
+}
 
-export default AddChannelInput;
+export default ChannelInput;

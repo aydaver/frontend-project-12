@@ -1,16 +1,12 @@
 import { Modal, Button } from 'react-bootstrap';
-import axios from 'axios';
+import { channelRemove } from '../../model/channelsApi';
 
-const DeleteAcceptModal = (props) => {
+const ConfirmModal = (props) => {
 
     const token = localStorage.getItem('token');
 
     const handleRemoveChannel = async () => {
-      await axios.delete(`/api/v1/channels/${props.channelId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
+        channelRemove(props.channelId, token)
     }
 
 
@@ -35,4 +31,4 @@ const DeleteAcceptModal = (props) => {
             </>
 }
 
-export default DeleteAcceptModal;
+export default ConfirmModal;
