@@ -3,4 +3,4 @@ build:
 start:
 	npx start-server
 install: 
-	npm i
+	npm ci 
