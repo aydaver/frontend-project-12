@@ -8,10 +8,10 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:5173',
+        target: 'http://localhost:5001',
       },
       '/socket.io': {
-        target: 'ws://localhost:5173',
+        target: 'ws://localhost:5001',
         ws: true,
         rewriteWsOrigin: true,
       },
