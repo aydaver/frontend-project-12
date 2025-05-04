@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/dist",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "cd frontend && npm ci"
   },
   "dependencies": {
     "@hexlet/chat-server": "^2.0.4",
