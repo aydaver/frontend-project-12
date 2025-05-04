@@ -6,6 +6,19 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { handleText } from "../model/messagesHandlers";
 import { handleSubmit } from "../model/messagesHandlers";
 import CountMessages from "./additionalUI/CountMessages";
+import i18next from 'i18next';
+import russian from '../../Common/locales/ru';
+
+await i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
+  
 
 const Messages = (props) => {
 
@@ -79,9 +92,9 @@ const Messages = (props) => {
                             value={text}
                             onChange={handleText(setText)}
                             type="text"
-                            placeholder="Введите сообщение"
+                            placeholder={i18next.t('messagePlaceHolder')}
                             />
-                            <button type="submit" className="btn btn-primary">Отправить</button>
+                            <button type="submit" className="btn btn-primary">{i18next.t('sendButton')}</button>
                         </form>
                     </div>
                 </div>

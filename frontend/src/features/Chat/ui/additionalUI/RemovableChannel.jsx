@@ -1,5 +1,17 @@
 import { useState, useEffect } from "react";
 import { ButtonGroup, Button, Dropdown } from "react-bootstrap";
+import i18next from 'i18next';
+import russian from '../../../Common/locales/ru';
+
+await i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
 
 const RemovableChannel = (props) => {
 
@@ -42,8 +54,8 @@ const RemovableChannel = (props) => {
                   />
               </div>
               <Dropdown.Menu >
-                <Dropdown.Item as={Button} onClick={props.handleDeleteAcceptModal}>Удалить</Dropdown.Item>
-                <Dropdown.Item as={Button} onClick={props.handleFormTypeAndModal}>Переименовать</Dropdown.Item>
+                <Dropdown.Item as={Button} onClick={props.handleDeleteAcceptModal}>{i18next.t('deleteButton')}</Dropdown.Item>
+                <Dropdown.Item as={Button} onClick={props.handleFormTypeAndModal}>{i18next.t('renameButton')}</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
 }

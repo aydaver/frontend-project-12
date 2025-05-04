@@ -4,8 +4,34 @@ import { Button, Modal } from "react-bootstrap";
 import { schemas } from "../../../Common/helpers/validation";
 import { useSelector } from "react-redux";
 import { channelPost, channelEdit } from "../../model/channelsApi";
+import { toast } from 'react-toastify';
+import i18next from 'i18next';
+import russian from '../../../Common/locales/ru';
+
+await i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
 
 const ChannelInput = (props) => {
+
+    const connectionErrorToast = () => {
+        toast.error(i18next.t('connectionError'), {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    }
 
     const [errorStatus, setErrorStatus] = useState('');
 
@@ -20,17 +46,41 @@ const ChannelInput = (props) => {
         if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
             setErrorStatus('Должно быть уникальным');
         } else {
-            try {
-                if (props.formType === 'add') {
-                    channelPost(newChannel, token)
-                } else if (props.formType === 'edit') {
-                    channelEdit(props.channelId, newChannel, token)
+            if (props.formType === 'add') {
+                try {
+                    await channelPost(newChannel, token)
+                    toast.success(i18next.t('channelAdded'), {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                } catch {
+                    connectionErrorToast();
                 }
-                props.close();
-                setErrorStatus('');
-            } catch (error) {
-                setErrorStatus(error.status);
+            } else if (props.formType === 'edit') {
+                try {
+                    await channelEdit(props.channelId, newChannel, token)
+                    toast.success(i18next.t('channelEdited'), {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: false,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                } catch {
+                    connectionErrorToast();
+                }
             }
+            props.close();
+            setErrorStatus('');
         }
     }
 
@@ -44,7 +94,7 @@ const ChannelInput = (props) => {
                 >
                     <Modal.Header closeButton>
                         <Modal.Title id="example-modal-sizes-title-lg">
-                            {props.formType === 'add' ? 'Добавить канал' : 'Переименовать канал'}
+                            {props.formType === 'add' ? i18next.t('addChannelTitle') : i18next.t('renameChannelTitle')}
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -53,7 +103,7 @@ const ChannelInput = (props) => {
                                 channelName: props.formType === "edit" ? props.oldChannelName : '',
                             }}
                             onSubmit={(values) => handleSubmit(values)}
-                            validationSchema={schemas.custom}
+                            validationSchema={schemas.channel}
                         > 
                             {() => (
                                 <Form>
@@ -63,7 +113,7 @@ const ChannelInput = (props) => {
                                         <p className='text-danger'>{errorStatus}</p>
                                     </div>
                                     <Button type="submit" className='w-100 mt-5'>
-                                        {props.formType === 'add' ? 'Добавить' : 'Переименовать'}
+                                        {props.formType === 'add' ? i18next.t('addButton') : i18next.t('renameButton')}
                                     </Button>
                                 </Form>
                             )}

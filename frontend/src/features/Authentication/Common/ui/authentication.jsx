@@ -7,6 +7,19 @@ import CommonHeader from '../../../Common/ui/CommonHeader';
 import { schemas } from '../../../Common/helpers/validation';
 import { handleLogin } from '../../Login/model/handlers';
 import { handleSignUp } from '../../SignUp/model/handlers';
+import i18next from 'i18next';
+import russian from '../../../Common/locales/ru';
+
+await i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
+  
 
 const Authentication = (props) => {
 
@@ -23,7 +36,7 @@ const Authentication = (props) => {
     const handlePasswordCheck = () => {
         return type === 'signup' ? 
         <div className="form-group mb-4">
-            <label htmlFor="passwordCheck">Подтвердите пароль</label>
+            <label htmlFor="passwordCheck">{i18next.t('passwordConfirmFormTitle')}</label>
             <Field type="password" name="passwordCheck" className="form-control"/>
             <Error name="passwordCheck">{(error) => <span className='text-danger'>{error}</span>}</Error>
         </div> 
@@ -41,7 +54,7 @@ const Authentication = (props) => {
                             <Image src={image} alt="login image" height='300' width="300" roundedCircle />
                         </Col>
                         <Col className="middle-inputs px-5" sm={6} lg={6}>
-                            <h1 className='text-center mb-4'>{type === 'signup' ? 'Регистрация' : 'Войти'}</h1>
+                            <h1 className='text-center mb-4'>{type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')}</h1>
                             <Formik
                                 initialValues={{
                                     userName: '',
@@ -54,13 +67,13 @@ const Authentication = (props) => {
                                     <div className="">
                                         <Form>
                                             <div className="form-group mb-4">
-                                                <label htmlFor="userName">Ваш ник</label>
+                                                <label htmlFor="userName">{i18next.t('nickNameFormTitle')}</label>
                                                 <Field type="userName" id="userName" name="userName" className="form-control"/>
                                                 <Error name="userName">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                                 <p className='text-danger my-0'>{errorState}</p>
                                             </div>
                                             <div className="form-group mb-4">
-                                                <label htmlFor="password">Пароль</label>
+                                                <label htmlFor="password">{i18next.t('passwordFormTitle')}</label>
                                                 <Field type="password" name="password" className="form-control"/>
                                                 <Error name="password">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                             </div>
@@ -76,11 +89,11 @@ const Authentication = (props) => {
                                                     aria-hidden="true"
                                                     className="me-2"
                                                     /> {
-                                                    type === 'signup' ? 'Регистрация' : 'Вход...'
+                                                    type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
                                                     }
                                                 </>
                                                 ) : (
-                                                type === 'signup' ? 'Регистрация' : 'Войти'
+                                                type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')
                                                 )}
                                             </Button>
                                         </Form>
@@ -90,7 +103,7 @@ const Authentication = (props) => {
                         </Col>
                         <Col className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100">
                             <p className="my-0">{type === 'signup' ? 'Есть аккаунт?' : 'Нет аккаунта?'}</p>
-                            <Button className='my-0 pe-0 ps-2' variant='link' onClick={() => {navigate(type === 'signup' ? "/login" : "/signup")}}>{type === 'signup' ? 'Войти' : 'Регистрация'}</Button>
+                            <Button className='my-0 pe-0 ps-2' variant='link' onClick={() => {navigate(type === 'signup' ? "/login" : "/signup")}}>{type === 'signup' ? i18next.t('loginTitle') : i18next.t('signupTitle')}</Button>
                         </Col>
                     </Row>
                 </Col>

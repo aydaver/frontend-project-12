@@ -6,10 +6,23 @@ import { clearMessagesById } from "../../Chat/model/messagesSlice";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { Row, Col, Nav, Tab, Button } from 'react-bootstrap';
+import { ToastContainer } from 'react-toastify';
 import Messages from "./Messages";
 import AddChannelInput from "./additionalUI/ChannellInput";
 import ChannelBurgerElement from "./additionalUI/RemovableChannel";
 import DeleteAcceptModal from "./additionalUI/ConfirmModal";
+import i18next from 'i18next';
+import russian from '../../Common/locales/ru';
+
+await i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
 
 const Channels = () => {
 
@@ -77,15 +90,27 @@ const Channels = () => {
     const channels = useSelector(state => state.channels.channels);
 
 return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-example" defaultActiveKey={activeChannelId}>
+            <ToastContainer
+                                        position="top-right"
+                                        autoClose={5000}
+                                        hideProgressBar={false}
+                                        newestOnTop={false}
+                                        closeOnClick={false}
+                                        rtl={false}
+                                        pauseOnFocusLoss
+                                        draggable
+                                        pauseOnHover
+                                        theme="light"
+            />
             <Row className="h-75 w-75 shadow rounded" sm={12} lg={12}>
                 <Col className="rounded-left border-end" sm={3} lg={3}>
                     <div className="d-flex my-4 justify-content-between align-content-center">
-                        <h4 className="py-0 my-0" style={{height: '30px'}}>Каналы</h4>
+                        <h4 className="py-0 my-0" style={{height: '30px'}}>{i18next.t('channelsTitle')}</h4>
                         <Button className="btn btn-primary" onClick={() => {
                             setFormType('add');
                             setModalShown(true);
                         }}>+</Button>
-                        <AddChannelInput close={() => setModalShown(false)} isShown={isModalShown} title="Добавить канал" buttonTitle="Добавить" formType={formType} channelId={activeChannelId} oldChannelName={oldChannelName}/>
+                        <AddChannelInput close={() => setModalShown(false)} isShown={isModalShown} title={i18next.t('addChannelTitle')} buttonTitle={i18next.t('addButton')} formType={formType} channelId={activeChannelId} oldChannelName={oldChannelName}/>
                     </div>
                     <Nav variant="pills" className="flex-column w-100">
                         {channels.map((channel) => {

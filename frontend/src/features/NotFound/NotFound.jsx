@@ -1,4 +1,4 @@
-import meme from '../../assets/404.gif'
+import meme from '../../assets/images/404.gif'
 
 import { Container, Row, Col, Image } from 'react-bootstrap';
 
