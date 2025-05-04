@@ -1,5 +1,4 @@
 import Channels from "./Channels";
-import Messages from "./Messages";
 import ExitButton from "./additionalUI/ExitButton";
 import CommonHeader from "../../Common/ui/CommonHeader";
 import React from 'react';

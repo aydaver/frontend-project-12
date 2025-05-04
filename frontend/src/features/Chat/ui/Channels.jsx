@@ -14,7 +14,7 @@ import DeleteAcceptModal from "./additionalUI/ConfirmModal";
 import i18next from 'i18next';
 import russian from '../../Common/locales/ru';
 
-await i18next.init({
+i18next.init({
     lng: 'ru',
     resources: {
       ru: {

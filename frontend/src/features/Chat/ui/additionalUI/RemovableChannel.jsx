@@ -3,7 +3,7 @@ import { ButtonGroup, Button, Dropdown } from "react-bootstrap";
 import i18next from 'i18next';
 import russian from '../../../Common/locales/ru';
 
-await i18next.init({
+i18next.init({
     lng: 'ru',
     resources: {
       ru: {
