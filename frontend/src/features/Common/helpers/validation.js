@@ -2,7 +2,7 @@ import * as Yup from 'yup';
 import i18next from 'i18next';
 import russian from '../locales/ru';
 
-await i18next.init({
+i18next.init({
     lng: 'ru',
     resources: {
       ru: {
