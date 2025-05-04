@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build"
+    "build": "npm run build --prefix frontend",
+    "start": "start-server -s ./frontend/dist",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "postinstall": "cd frontend && npm ci"
   },
   "repository": {
     "type": "git",
