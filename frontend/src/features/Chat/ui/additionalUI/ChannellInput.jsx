@@ -112,9 +112,12 @@ const ChannelInput = (props) => {
                                         <Error name="channelName">{(error) => <span className="text-danger">{error}</span>}</Error>
                                         <p className='text-danger'>{errorStatus}</p>
                                     </div>
-                                    <Button type="submit" className='w-100 mt-5'>
-                                        {props.formType === 'add' ? i18next.t('addButton') : i18next.t('renameButton')}
-                                    </Button>
+                                    <div className="align-items-center justify-content-end d-flex">
+                                        <Button className="me-3 btn-secondary" onClick={() => props.close()}>{i18next.t('cancelButton')}</Button>
+                                        <Button type="submit" className=''>
+                                            {props.formType === 'add' ? i18next.t('addButton') : i18next.t('renameButton')}
+                                        </Button>
+                                    </div>
                                 </Form>
                             )}
                         </Formik>
