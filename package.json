@@ -6,7 +6,6 @@
   "scripts": {
     "build": "npm run build --prefix frontend",
     "start": "start-server -s ./frontend/dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "postinstall": "cd frontend && npm ci"
   },
   "repository": {
@@ -18,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/aydaver/frontend-project-12/issues"
   },
-  "homepage": "https://github.com/aydaver/frontend-project-12#readme"
+  "homepage": "https://github.com/aydaver/frontend-project-12#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.14"
+  }
 }
