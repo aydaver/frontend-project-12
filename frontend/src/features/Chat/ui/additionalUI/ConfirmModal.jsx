@@ -2,7 +2,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { channelRemove } from '../../model/channelsApi';
 import { toast } from 'react-toastify';
 import i18next from 'i18next';
-import russian from '../../../Common/locales/ru';
+import russian from '../../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',

@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { fetchChannels, addChannel, removeChannel, renameChannel } from "../../Chat/model/channelsSlice";
+import { fetchChannels, addChannel, removeChannel, renameChannel } from "../../../common/channelsSlice";
 import { useDispatch } from 'react-redux';
-import { clearMessagesById } from "../../Chat/model/messagesSlice";
+import { clearMessagesById } from "../../../common/messagesSlice";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { Row, Col, Nav, Tab, Button } from 'react-bootstrap';
 import { ToastContainer } from 'react-toastify';
 import Messages from "./Messages";
 import AddChannelInput from "./additionalUI/ChannellInput";
-import ChannelBurgerElement from "./additionalUI/RemovableChannel";
-import DeleteAcceptModal from "./additionalUI/ConfirmModal";
+import RemovableChannel from "./additionalUI/RemovableChannel";
+import ConfirmModal from "./additionalUI/ConfirmModal";
 import i18next from 'i18next';
-import russian from '../../Common/locales/ru';
+import russian from '../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',
@@ -115,12 +115,14 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                     <Nav variant="pills" className="flex-column w-100">
                         {channels.map((channel) => {
                             if (!channel.removable) {
-                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap" key={channel.id} eventKey={channel.id}>
-                                            {`# ${channel.name}`}
+                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap p-0" style={{'--hover-color':'red'}} key={channel.id} eventKey={channel.id}>
+                                            <button className ={activeChannelId === channel.id ? "text-start h-100 w-100 p-0 m-0 rounded btn btn-primary p-2" : "text-start h-100 w-100 p-0 m-0 rounde btn btn-link text-decoration-none p-2"}>
+                                                {`# ${channel.name}`}
+                                            </button>
                                         </Nav.Link>
                             } else {
-                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 py-0 flex-wrap" key={channel.id} eventKey={channel.id}>
-                                            <ChannelBurgerElement handleFormTypeAndModal={() => {
+                                return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 p-0 flex-wrap" key={channel.id} eventKey={channel.id}>
+                                            <RemovableChannel handleFormTypeAndModal={() => {
                                                 setFormType('edit');
                                                 setModalShown(true);
                                                 setOldChannelName(channel.name);
@@ -129,7 +131,7 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                                             channelId={channel.id} 
                                             activeChannelId={activeChannelId} 
                                             channelName={channel.name}/>
-                                            <DeleteAcceptModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id}/>
+                                            <ConfirmModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id}/>
                                         </Nav.Link>
                             }
                         })

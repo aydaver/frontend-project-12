@@ -1,7 +1,8 @@
 export default {
     loginTitle: 'Войти',
     signupTitle: 'Регистрация',
-    nickNameFormTitle: 'Ваш ник',
+    nickNameFormTitleLogin: 'Ваш ник',
+    nickNameFormTitleSignUp: 'Имя пользователя',
     passwordFormTitle: 'Пароль',
     passwordConfirmFormTitle: 'Подтвердите пароль',
     noAccountQuestion: 'Нет аккаунта?',
@@ -19,7 +20,7 @@ export default {
     deleteChannelTitle: 'Удалить канал',
     areYouSure: 'Уверены?',
     cancelButton: 'Отменить',
-    messagePlaceHolder: 'Введите сообщение',
+    messagePlaceHolder: 'Введите сообщение...',
     requiredField: 'Обязательное поле',
     threeToTwenty: 'От 3 до 20 символов',
     passwordsMustMatch: 'Пароли должны совпадать',

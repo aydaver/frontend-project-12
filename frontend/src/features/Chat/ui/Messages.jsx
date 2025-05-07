@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { io } from "socket.io-client";
-import { addMessage, fetchMessages } from '../model/messagesSlice';
+import { addMessage, fetchMessages } from '../../../common/messagesSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useMemo, useRef } from "react";
 import { handleText } from "../model/messagesHandlers";
 import { handleSubmit } from "../model/messagesHandlers";
 import CountMessages from "./additionalUI/CountMessages";
 import i18next from 'i18next';
-import russian from '../../Common/locales/ru';
+import russian from '../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',

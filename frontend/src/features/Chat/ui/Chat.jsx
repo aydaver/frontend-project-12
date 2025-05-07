@@ -1,6 +1,6 @@
 import Channels from "./Channels";
 import ExitButton from "./additionalUI/ExitButton";
-import CommonHeader from "../../Common/ui/CommonHeader";
+import CommonHeader from "../../../common/ui/CommonHeader";
 import React from 'react';
 
 const Chat = () => {

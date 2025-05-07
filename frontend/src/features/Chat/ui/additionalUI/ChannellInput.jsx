@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage as Error} from 'formik';
 import { Button, Modal } from "react-bootstrap";
-import { schemas } from "../../../Common/helpers/validation";
+import { schemas } from "../../../../common/helpers/validation";
 import { useSelector } from "react-redux";
 import { channelPost, channelEdit } from "../../model/channelsApi";
 import { toast } from 'react-toastify';
 import i18next from 'i18next';
-import russian from '../../../Common/locales/ru';
+import russian from '../../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',

@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import russian from '../../Common/locales/ru';
+import russian from '../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',

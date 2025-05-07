@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import getChannelsReducer from '../../features/Chat/model/channelsSlice';
-import messagesReducer from '../../features/Chat/model/messagesSlice';
+import getChannelsReducer from '../channelsSlice';
+import messagesReducer from '../messagesSlice';
 
 
 export default configureStore({

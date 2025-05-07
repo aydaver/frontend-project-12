@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { Button, Container, Row, Col, Image, Spinner } from 'react-bootstrap';
 import authOff from '../../../../assets/images/authOff.jpg'
 import { useNavigate } from 'react-router-dom';
-import CommonHeader from '../../../Common/ui/CommonHeader';
-import { schemas } from '../../../Common/helpers/validation';
+import CommonHeader from '../../../../common/ui/CommonHeader';
+import { schemas } from '../../../../common/helpers/validation';
 import { handleLogin } from '../../Login/model/handlers';
 import { handleSignUp } from '../../SignUp/model/handlers';
 import i18next from 'i18next';
-import russian from '../../../Common/locales/ru';
+import russian from '../../../../common/locales/ru';
 
 i18next.init({
     lng: 'ru',
@@ -67,7 +67,7 @@ const Authentication = (props) => {
                                     <div className="">
                                         <Form>
                                             <div className="form-group mb-4">
-                                                <label htmlFor="userName">{i18next.t('nickNameFormTitle')}</label>
+                                                <label htmlFor="userName">{type === 'signup' ? i18next.t('nickNameFormTitleSignUp') : i18next.t('nickNameFormTitleLogin')}</label>
                                                 <Field type="userName" id="userName" name="userName" className="form-control"/>
                                                 <Error name="userName">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                                 <p className='text-danger my-0'>{errorState}</p>
