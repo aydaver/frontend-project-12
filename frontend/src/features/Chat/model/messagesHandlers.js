@@ -11,6 +11,7 @@ export const handleSubmit = (text, channelId, setText) => {
     const token = localStorage.getItem('token');
 
     filter.loadDictionary('ru')
+    filter.loadDictionary('en')
 
     const newMessage = {
         body: filter.clean(text),

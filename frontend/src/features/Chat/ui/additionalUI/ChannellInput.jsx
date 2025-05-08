@@ -5,6 +5,7 @@ import { schemas } from "../../../../common/helpers/validation";
 import { useSelector } from "react-redux";
 import { channelPost, channelEdit } from "../../model/channelsApi";
 import { toast } from 'react-toastify';
+import filter from 'leo-profanity';
 import i18next from 'i18next';
 import russian from '../../../../common/locales/ru';
 
@@ -41,7 +42,10 @@ const ChannelInput = (props) => {
 
         const token = localStorage.getItem('token');
 
-        const newChannel = {name: values.channelName};
+        filter.loadDictionary('ru')
+        filter.loadDictionary('en')
+
+        const newChannel = {name: filter.clean(values.channelName)};
 
         if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
             setErrorStatus('Должно быть уникальным');
@@ -108,6 +112,7 @@ const ChannelInput = (props) => {
                             {() => (
                                 <Form>
                                     <div className="form-group mt-3">
+                                        <label for="channelName">Имя канала</label>
                                         <Field autoFocus type="text" id="channelName" name="channelName" className="form-control"/>
                                         <Error name="channelName">{(error) => <span className="text-danger">{error}</span>}</Error>
                                         <p className='text-danger'>{errorStatus}</p>
