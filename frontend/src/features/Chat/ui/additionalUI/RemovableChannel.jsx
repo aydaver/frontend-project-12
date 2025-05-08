@@ -50,7 +50,9 @@ const RemovableChannel = (props) => {
                         color: isActive ? 'white' : '#0d6efd'
                       }} 
                       id="dropdown-split-basic"
-                  />
+                  >
+                    <span class="visually-hidden">Управление каналом</span>
+                  </Dropdown.Toggle>
               </div>
               <Dropdown.Menu >
                 <Dropdown.Item as={Button} onClick={props.handleDeleteAcceptModal}>{i18next.t('deleteButton')}</Dropdown.Item>
