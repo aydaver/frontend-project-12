@@ -54,10 +54,10 @@ const ConfirmModal = (props) => {
                 </Modal.Header>
                 <Modal.Body>{i18next.t('areYouSure')}</Modal.Body>
                 <Modal.Footer>
-                    <Button className='btn btn-secondary' onClick={props.close}>
+                    <Button type="button" variant='secondary' onClick={props.close}>
                         {i18next.t('cancelButton')}
                     </Button>
-                    <Button className='btn btn-danger' onClick={() => {
+                    <Button type="button" variant='danger' onClick={() => {
                         handleRemoveChannel();
                         props.close();
                     }}>
