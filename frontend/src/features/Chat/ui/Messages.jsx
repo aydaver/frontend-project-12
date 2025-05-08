@@ -90,6 +90,7 @@ const Messages = (props) => {
                             autoFocus
                             className="form-control me-2"
                             value={text}
+                            aria-label="Новое сообщение"
                             onChange={handleText(setText)}
                             type="text"
                             placeholder={i18next.t('messagePlaceHolder')}

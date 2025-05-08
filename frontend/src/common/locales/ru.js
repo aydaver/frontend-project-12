@@ -26,7 +26,7 @@ export default {
     threeToTwenty: 'От 3 до 20 символов',
     passwordsMustMatch: 'Пароли должны совпадать',
     fromSix: 'Не менее 6 символов',
-    connectionError: 'Ошибка сети',
+    connectionError: 'Ошибка соединения',
     channelDeleted: 'Канал удалён',
     channelEdited: 'Канал переименован',
     channelAdded: 'Канал добавлен'
