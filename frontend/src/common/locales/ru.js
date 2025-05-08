@@ -29,6 +29,6 @@ export default {
     connectionError: 'Ошибка соединения',
     channelDeleted: 'Канал удалён',
     channelEdited: 'Канал переименован',
-    channelAdded: 'Канал добавлен'
+    channelAdded: 'Канал создан'
   };
   
