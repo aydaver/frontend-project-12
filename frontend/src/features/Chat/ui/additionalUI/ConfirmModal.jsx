@@ -52,17 +52,25 @@ const ConfirmModal = (props) => {
                 <Modal.Header closeButton>
                     <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{i18next.t('areYouSure')}</Modal.Body>
-                <Modal.Footer>
-                    <Button type="button" variant='secondary' onClick={props.close}>
-                        {i18next.t('cancelButton')}
-                    </Button>
-                    <Button type="button" variant='danger' onClick={() => {
-                        handleRemoveChannel();
-                        props.close();
-                    }}>
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    <div>
+                        {i18next.t('areYouSure')}
+                        <div className='mt-3 d-flex justify-content-end'>
+                            <Button className='me-2' type="button" variant='secondary' onClick={props.close}>
+                                {i18next.t('cancelButton')}
+                            </Button>
+                            <Button type="button" variant='danger' onClick={() => {
+                                handleRemoveChannel();
+                                props.close();
+                            }}>
+                                {i18next.t('deleteButton')}
+                            </Button>
+                        </div>
+                    </div>
+
+
+                </Modal.Body>
+                    
                 </Modal>
             </>
 }
