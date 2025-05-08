@@ -6,6 +6,7 @@ export default {
     passwordFormTitle: 'Пароль',
     passwordConfirmFormTitle: 'Подтвердите пароль',
     noAccountQuestion: 'Нет аккаунта?',
+    userExist: 'Такой пользователь уже существует',
     exitButton: 'Выйти',
     channelsTitle: 'Каналы',
     oneMessageTitle: 'сообщение',

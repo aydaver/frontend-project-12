@@ -1,5 +1,18 @@
 import signUp from './signUpApi';
 import authOn from '../../../../assets/images/authOn.jpg';
+import i18next from 'i18next';
+import russian from '../../../../common/locales/ru';
+
+i18next.init({
+    lng: 'ru',
+    resources: {
+      ru: {
+        translation:
+          russian,
+      },
+    },
+});
+  
 
 export const handleSignUp = async ( credentials, navigate, setError, setImage, setIsLoading ) => {
     setIsLoading(true);
@@ -20,7 +33,7 @@ export const handleSignUp = async ( credentials, navigate, setError, setImage, s
             setTimeout(() => {
                 setIsLoading(false);
             }, 500)
-            setError('Пользователь уже существует');
+            setError(i18next.t('userExist'));
         }
     }
 }
