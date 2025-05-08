@@ -37,7 +37,7 @@ const Authentication = (props) => {
         return type === 'signup' ? 
         <div className="form-group mb-4">
             <label htmlFor="passwordCheck">{i18next.t('passwordConfirmFormTitle')}</label>
-            <Field type="password" name="passwordCheck" className="form-control"/>
+            <Field id="passwordCheck" type="password" name="passwordCheck" className="form-control"/>
             <Error name="passwordCheck">{(error) => <span className='text-danger'>{error}</span>}</Error>
         </div> 
         : 
@@ -69,13 +69,13 @@ const Authentication = (props) => {
                                             <div className="form-group mb-4">
                                                 <label htmlFor="userName">{type === 'signup' ? i18next.t('nickNameFormTitleSignUp') : i18next.t('nickNameFormTitleLogin')}</label>
                                                 <Field type="userName" id="userName" name="userName" className="form-control"/>
-                                                <Error name="userName">{(error) => <span className='text-danger'>{error}</span>}</Error>
+                                                <Error id="userName" name="userName">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                                 <p className='text-danger my-0'>{errorState}</p>
                                             </div>
                                             <div className="form-group mb-4">
                                                 <label htmlFor="password">{i18next.t('passwordFormTitle')}</label>
                                                 <Field type="password" name="password" className="form-control"/>
-                                                <Error name="password">{(error) => <span className='text-danger'>{error}</span>}</Error>
+                                                <Error id="password" name="password">{(error) => <span className='text-danger'>{error}</span>}</Error>
                                             </div>
                                             {handlePasswordCheck()}
                                             <Button type="submit" className='w-100' disabled={isLoading}>

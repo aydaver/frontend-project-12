@@ -29,6 +29,7 @@ const userName = Yup.string()
     .required(i18next.t('requiredField'))
 const passwordCheck = Yup.string()
     .oneOf([Yup.ref('password'), null], i18next.t('passwordsMustMatch'))
+    .required(i18next.t('requiredField'))
 
 export const schemas = {
     channel: Yup.object().shape({
