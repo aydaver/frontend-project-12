@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "i18next": "^25.1.1",
-    "rollbar": "^2.26.4"
+    "rollbar": "^2.26.4",
+    "@hexlet/chat-server": "^2.0.4"
   }
 }
