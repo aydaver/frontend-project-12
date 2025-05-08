@@ -48,7 +48,7 @@ const ConfirmModal = (props) => {
 
 
     return  <>
-                <Modal centered show={props.isShown} onHide={props.close}>
+                <Modal centered show={props.isShown} onHide={props.close} animation={false}>
                 <Modal.Header closeButton>
                     <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
                 </Modal.Header>
