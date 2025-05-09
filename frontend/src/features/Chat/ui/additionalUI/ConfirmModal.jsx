@@ -1,6 +1,7 @@
 import { Modal, Button } from 'react-bootstrap';
 import { channelRemove } from '../../model/channelsApi';
 import { toast } from 'react-toastify';
+import { Form } from 'formik';
 import i18next from 'i18next';
 import russian from '../../../../common/locales/ru';
 
@@ -13,7 +14,6 @@ i18next.init({
       },
     },
 });
-
 
 const ConfirmModal = (props) => {
 
@@ -46,29 +46,23 @@ const ConfirmModal = (props) => {
         }
     }
 
-
     return  <>
                 <Modal centered show={props.isShown} onHide={props.close}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <div>
-                        {i18next.t('areYouSure')}
-                        <div className='mt-3 d-flex justify-content-end'>
-                            <Button className='me-2' type="button" variant='secondary' onClick={props.close}>
-                                {i18next.t('cancelButton')}
-                            </Button>
-                            <Button style={{pointerEvents: 'all'}} type="submit" variant='danger' onClick={() => {
-                                handleRemoveChannel();
-                                props.close();
-                            }}>
-                                {i18next.t('deleteButton')}
-                            </Button>
-                        </div>
-                    </div>
-                </Modal.Body>
-                    
+                    <Modal.Header closeButton>
+                        <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                            <p>{i18next.t('areYouSure')}</p>
+                            <div className="align-items-center justify-content-end d-flex">
+                                <Button className="me-3 btn-secondary" onClick={() => props.close()}>{i18next.t('cancelButton')}</Button>
+                                <Button variant='danger' type="button" onClick={() => {
+                                    handleRemoveChannel();
+                                    props.close();
+                                }}>
+                                    {i18next.t('deleteButton')}
+                                </Button>
+                            </div>
+                    </Modal.Body>              
                 </Modal>
             </>
 }
