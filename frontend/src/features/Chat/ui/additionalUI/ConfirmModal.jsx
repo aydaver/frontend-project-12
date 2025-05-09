@@ -1,7 +1,6 @@
 import { Modal, Button } from 'react-bootstrap';
 import { channelRemove } from '../../model/channelsApi';
 import { toast } from 'react-toastify';
-import { Form } from 'formik';
 import i18next from 'i18next';
 import russian from '../../../../common/locales/ru';
 
@@ -58,7 +57,7 @@ const ConfirmModal = (props) => {
                                 <Button variant='danger' type="button" onClick={() => {
                                     handleRemoveChannel();
                                     props.close();
-                                }}>
+                                }} style={{ position: 'relative', zIndex: 9999 }}>
                                     {i18next.t('deleteButton')}
                                 </Button>
                             </div>

@@ -6,7 +6,6 @@ import { clearMessagesById } from "../../../common/messagesSlice";
 import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import { Row, Col, Nav, Tab, Button } from 'react-bootstrap';
-import { ToastContainer } from 'react-toastify';
 import Messages from "./Messages";
 import AddChannelInput from "./additionalUI/ChannellInput";
 import RemovableChannel from "./additionalUI/RemovableChannel";
@@ -90,18 +89,6 @@ const Channels = () => {
     const channels = useSelector(state => state.channels.channels);
 
 return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-example" defaultActiveKey={activeChannelId}>
-            <ToastContainer
-                                        position="top-right"
-                                        autoClose={5000}
-                                        hideProgressBar={false}
-                                        newestOnTop={false}
-                                        closeOnClick={false}
-                                        rtl={false}
-                                        pauseOnFocusLoss
-                                        draggable
-                                        pauseOnHover
-                                        theme="light"
-            />
             <Row className="h-75 w-75 shadow rounded" sm={12} lg={12}>
                 <Col className="rounded-left border-end" sm={3} lg={3}>
                     <div className="d-flex my-4 justify-content-between align-content-center">
