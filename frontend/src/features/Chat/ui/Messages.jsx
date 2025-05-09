@@ -41,7 +41,7 @@ const Messages = (props) => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5002");
+        const socket = io("ws://localhost:5001");
 
         socket.on('newMessage', (payload) => {
             dispatch(addMessage(payload));
