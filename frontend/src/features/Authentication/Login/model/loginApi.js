@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const login = async (credentials) => {
   try {
@@ -8,12 +8,12 @@ const login = async (credentials) => {
         username: credentials.userName,
         password: credentials.password,
       },
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.log(error)
+    throw error
   }
-};
+}
 
-export default login;
+export default login

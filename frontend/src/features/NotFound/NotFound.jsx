@@ -1,7 +1,7 @@
 import {
   Container, Row, Col, Image,
-} from 'react-bootstrap';
-import meme from '../../assets/images/404.gif';
+} from 'react-bootstrap'
+import meme from '../../assets/images/404.gif'
 
 const NotFound = () => (
   <Container fluid className="bg-dark h-100">
@@ -20,6 +20,6 @@ const NotFound = () => (
       <Col />
     </Row>
   </Container>
-);
+)
 
-export default NotFound;
+export default NotFound

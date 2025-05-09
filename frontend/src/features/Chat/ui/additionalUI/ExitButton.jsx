@@ -1,7 +1,7 @@
-import { Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import i18next from 'i18next';
-import russian from '../../../../common/locales/ru';
+import { Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import i18next from 'i18next'
+import russian from '../../../../common/locales/ru'
 
 i18next.init({
   lng: 'ru',
@@ -11,15 +11,15 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
 const ExitButton = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleRemoveToken = () => {
-    localStorage.removeItem('token');
-    navigate('/login');
-  };
+    localStorage.removeItem('token')
+    navigate('/login')
+  }
 
   return (
     <div>
@@ -27,7 +27,7 @@ const ExitButton = () => {
         <Button type="submit">{i18next.t('exitButton')}</Button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default ExitButton;
+export default ExitButton

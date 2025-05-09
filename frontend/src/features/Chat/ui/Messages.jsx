@@ -1,13 +1,13 @@
-import { io } from 'socket.io-client';
-import { useDispatch, useSelector } from 'react-redux';
+import { io } from 'socket.io-client'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   useEffect, useState, useMemo, useRef,
-} from 'react';
-import i18next from 'i18next';
-import { addMessage, fetchMessages } from '../../../common/messagesSlice';
-import { handleText, handleSubmit } from '../model/messagesHandlers';
-import CountMessages from './additionalUI/CountMessages';
-import russian from '../../../common/locales/ru';
+} from 'react'
+import i18next from 'i18next'
+import { addMessage, fetchMessages } from '../../../common/messagesSlice'
+import { handleText, handleSubmit } from '../model/messagesHandlers'
+import CountMessages from './additionalUI/CountMessages'
+import russian from '../../../common/locales/ru'
 
 i18next.init({
   lng: 'ru',
@@ -17,42 +17,42 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
 const Messages = (props) => {
-  const { channelId, channelName } = props;
+  const { channelId, channelName } = props
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState('')
 
-  const messages = useSelector((state) => state.messages.messages);
+  const messages = useSelector((state) => state.messages.messages)
 
-  const filteredMessages = useMemo(() => messages.filter((message) => message.channelId === props.channelId), [messages, props.channelId]);
+  const filteredMessages = useMemo(() => messages.filter((message) => message.channelId === props.channelId), [messages, props.channelId])
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchMessages());
-  }, []);
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001');
+    dispatch(fetchMessages())
+  }, [])
+
+  useEffect(() => {
+    const socket = io('ws://localhost:5001')
 
     socket.on('newMessage', (payload) => {
-      dispatch(addMessage(payload));
-    });
+      dispatch(addMessage(payload))
+    })
 
     return () => {
-      socket.off('newMessage');
-    };
-  }, []);
+      socket.off('newMessage')
+    }
+  }, [])
 
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef(null)
 
   useEffect(() => {
     if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+      scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight
     }
-  }, [filteredMessages]);
+  }, [filteredMessages])
 
   return (
     <div className="h-100 d-flex flex-column">
@@ -76,8 +76,8 @@ const Messages = (props) => {
           </div>
           <form
             onSubmit={(e) => {
-              e.preventDefault();
-              handleSubmit(text, channelId, setText);
+              e.preventDefault()
+              handleSubmit(text, channelId, setText)
             }}
             className="d-flex border-top p-2"
           >
@@ -95,7 +95,7 @@ const Messages = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Messages;
+export default Messages

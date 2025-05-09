@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import {
   Formik, Form, Field, ErrorMessage as Error,
-} from 'formik';
-import { Button, Modal } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import filter from 'leo-profanity';
-import i18next from 'i18next';
-import { channelPost, channelEdit } from '../../model/channelsApi';
-import schemas from '../../../../common/helpers/validation';
-import russian from '../../../../common/locales/ru';
+} from 'formik'
+import { Button, Modal } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
+import filter from 'leo-profanity'
+import i18next from 'i18next'
+import { channelPost, channelEdit } from '../../model/channelsApi'
+import schemas from '../../../../common/helpers/validation'
+import russian from '../../../../common/locales/ru'
 
 i18next.init({
   lng: 'ru',
@@ -19,7 +19,7 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
 const ChannelInput = (props) => {
   const connectionErrorToast = () => {
@@ -32,29 +32,29 @@ const ChannelInput = (props) => {
       draggable: true,
       progress: undefined,
       theme: 'light',
-    });
-  };
+    })
+  }
 
-  const [errorStatus, setErrorStatus] = useState('');
+  const [errorStatus, setErrorStatus] = useState('')
 
-  const channelsExist = useSelector((state) => state.channels.channels);
+  const channelsExist = useSelector((state) => state.channels.channels)
 
   const handleSubmit = async (values) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token')
 
-    const createdBy = localStorage.getItem('username');
+    const createdBy = localStorage.getItem('username')
 
-    filter.loadDictionary('ru');
-    filter.loadDictionary('en');
+    filter.loadDictionary('ru')
+    filter.loadDictionary('en')
 
-    const newChannel = { name: filter.clean(values.channelName), createdBy };
+    const newChannel = { name: filter.clean(values.channelName), createdBy }
 
     if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
-      setErrorStatus('Должно быть уникальным');
+      setErrorStatus('Должно быть уникальным')
     } else {
       if (props.formType === 'add') {
         try {
-          await channelPost(newChannel, token);
+          await channelPost(newChannel, token)
           toast.success(i18next.t('channelAdded'), {
             position: 'top-right',
             autoClose: 5000,
@@ -66,11 +66,11 @@ const ChannelInput = (props) => {
             theme: 'light',
           });
         } catch {
-          connectionErrorToast();
+          connectionErrorToast()
         }
       } else if (props.formType === 'edit') {
         try {
-          await channelEdit(props.channelId, newChannel, token);
+          await channelEdit(props.channelId, newChannel, token)
           toast.success(i18next.t('channelEdited'), {
             position: 'top-right',
             autoClose: 5000,
@@ -80,15 +80,15 @@ const ChannelInput = (props) => {
             draggable: true,
             progress: undefined,
             theme: 'light',
-          });
+          })
         } catch {
-          connectionErrorToast();
+          connectionErrorToast()
         }
       }
-      props.close();
-      setErrorStatus('');
+      props.close()
+      setErrorStatus('')
     }
-  };
+  }
 
   return (
     <Modal
@@ -130,7 +130,7 @@ const ChannelInput = (props) => {
         </Formik>
       </Modal.Body>
     </Modal>
-  );
-};
+  )
+}
 
-export default ChannelInput;
+export default ChannelInput

@@ -1,28 +1,28 @@
 import {
   Formik, Form, Field, ErrorMessage as Error,
-} from 'formik';
-import { useState } from 'react';
+} from 'formik'
+import { useState } from 'react'
 import {
   Button, Container, Row, Col, Image, Spinner,
-} from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import i18next from '../../../../common/locales/i18n';
-import authOff from '../../../../assets/images/authOff.jpg';
-import CommonHeader from '../../../../common/ui/CommonHeader';
-import schemas from '../../../../common/helpers/validation';
-import { handleLogin } from '../../Login/model/handlers';
-import { handleSignUp } from '../../SignUp/model/handlers';
+} from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import i18next from '../../../../common/locales/i18n'
+import authOff from '../../../../assets/images/authOff.jpg'
+import CommonHeader from '../../../../common/ui/CommonHeader'
+import schemas from '../../../../common/helpers/validation'
+import { handleLogin } from '../../Login/model/handlers'
+import { handleSignUp } from '../../SignUp/model/handlers'
 
 const Authentication = (props) => {
-  const { type } = props;
+  const { type } = props
 
-  const [errorState, setError] = useState();
+  const [errorState, setError] = useState()
 
-  const [image, setImage] = useState(authOff);
+  const [image, setImage] = useState(authOff)
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handlePasswordCheck = () => (type === 'signup'
     ? (
@@ -34,7 +34,7 @@ const Authentication = (props) => {
         <Error name="passwordCheck">{(error) => <span className="text-danger">{error}</span>}</Error>
       </div>
     )
-    : null);
+    : null)
 
   return (
     <Container className="bg-black mw-100 h-100 my-0 px-0" sm={12} lg={12}>
@@ -101,13 +101,13 @@ const Authentication = (props) => {
             </Col>
             <Col className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100">
               <p className="my-0">{type === 'signup' ? 'Есть аккаунт?' : 'Нет аккаунта?'}</p>
-              <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate(type === 'signup' ? '/login' : '/signup'); }}>{type === 'signup' ? i18next.t('loginTitle') : i18next.t('signupTitle')}</Button>
+              <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate(type === 'signup' ? '/login' : '/signup') }}>{type === 'signup' ? i18next.t('loginTitle') : i18next.t('signupTitle')}</Button>
             </Col>
           </Row>
         </Col>
       </Row>
     </Container>
-  );
-};
+  )
+}
 
-export default Authentication;
+export default Authentication

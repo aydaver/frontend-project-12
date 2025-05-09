@@ -1,8 +1,8 @@
-import { Modal, Button } from 'react-bootstrap';
-import { toast } from 'react-toastify';
-import i18next from 'i18next';
-import { channelRemove } from '../../model/channelsApi';
-import russian from '../../../../common/locales/ru';
+import { Modal, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import i18next from 'i18next'
+import { channelRemove } from '../../model/channelsApi'
+import russian from '../../../../common/locales/ru'
 
 i18next.init({
   lng: 'ru',
@@ -12,14 +12,14 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
 const ConfirmModal = (props) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('token')
 
   const handleRemoveChannel = async () => {
     try {
-      await channelRemove(props.channelId, token);
+      await channelRemove(props.channelId, token)
       toast.success(i18next.t('channelDeleted'), {
         position: 'top-right',
         autoClose: 5000,
@@ -29,7 +29,7 @@ const ConfirmModal = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-      });
+      })
     } catch {
       toast.error(i18next.t('connectionError'), {
         position: 'top-right',
@@ -40,9 +40,9 @@ const ConfirmModal = (props) => {
         draggable: true,
         progress: undefined,
         theme: 'light',
-      });
+      })
     }
-  };
+  }
 
   return (
     <Modal size="md" aria-labelledby="example-modal-sizes-title-lg" centered show={props.isShown} onHide={props.close} style={{ position: 'fixed' }}>
@@ -57,8 +57,8 @@ const ConfirmModal = (props) => {
             variant="danger"
             type="button"
             onClick={() => {
-  handleRemoveChannel();
-  props.close();
+  handleRemoveChannel()
+  props.close()
 }}
             style={{ position: 'relative' }}
           >
@@ -67,7 +67,7 @@ const ConfirmModal = (props) => {
         </div>
       </Modal.Body>
     </Modal>
-  );
-};
+  )
+}
 
-export default ConfirmModal;
+export default ConfirmModal

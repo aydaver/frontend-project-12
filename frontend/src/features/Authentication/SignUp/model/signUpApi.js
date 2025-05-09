@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const signUp = async (credentials) => {
   try {
@@ -9,11 +9,11 @@ const signUp = async (credentials) => {
         password: credentials.password,
       },
     );
-    return response.data;
+    return response.data
   } catch (error) {
-    console.log(error);
-    throw error;
+    console.log(error)
+    throw error
   }
-};
+}
 
-export default signUp;
+export default signUp

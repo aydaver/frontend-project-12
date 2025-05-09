@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { ButtonGroup, Button, Dropdown } from 'react-bootstrap';
-import i18next from 'i18next';
-import russian from '../../../../common/locales/ru';
+import { useState, useEffect } from 'react'
+import { ButtonGroup, Button, Dropdown } from 'react-bootstrap'
+import i18next from 'i18next'
+import russian from '../../../../common/locales/ru'
 
 i18next.init({
   lng: 'ru',
@@ -11,15 +11,15 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
 const RemovableChannel = (props) => {
-  const [isActive, setActive] = useState();
+  const [isActive, setActive] = useState()
 
   useEffect(() => {
-    const active = props.channelId === props.activeChannelId;
-    setActive(active);
-  }, [props.activeChannelId, props.channelId]);
+    const active = props.channelId === props.activeChannelId
+    setActive(active)
+  }, [props.activeChannelId, props.channelId])
 
   return (
     <Dropdown as={ButtonGroup} className={isActive ? 'w-100 btn btn-primary p-0' : 'w-100 p-0'}>
@@ -57,7 +57,7 @@ const RemovableChannel = (props) => {
         <Dropdown.Item as={Button} onClick={props.handleFormTypeAndModal}>{i18next.t('renameButton')}</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-  );
-};
+  )
+}
 
-export default RemovableChannel;
+export default RemovableChannel

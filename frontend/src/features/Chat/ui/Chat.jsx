@@ -1,8 +1,7 @@
-import React from 'react';
-import { ToastContainer } from 'react-toastify';
-import Channels from './Channels';
-import ExitButton from './additionalUI/ExitButton';
-import CommonHeader from '../../../common/ui/CommonHeader';
+import { ToastContainer } from 'react-toastify'
+import Channels from './Channels'
+import ExitButton from './additionalUI/ExitButton'
+import CommonHeader from '../../../common/ui/CommonHeader'
 
 const Chat = () => (
   <div className="h-100">
@@ -23,6 +22,6 @@ const Chat = () => (
       <Channels />
     </div>
   </div>
-);
+)
 
-export default Chat;
+export default Chat
