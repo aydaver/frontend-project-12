@@ -118,7 +118,7 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                                             channelId={channel.id} 
                                             activeChannelId={activeChannelId} 
                                             channelName={channel.name}/>
-                                            <ConfirmModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id}/>
+                                            <ConfirmModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id} style={{ pointerEvents: 'none' }}/>
                                         </Nav.Link>
                             }
                         })

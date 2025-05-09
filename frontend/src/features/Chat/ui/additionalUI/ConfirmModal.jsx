@@ -46,18 +46,18 @@ const ConfirmModal = (props) => {
     }
 
     return  <>
-                <Modal centered show={props.isShown} onHide={props.close} style={{ pointerEvents: 'none' }}>
-                    <Modal.Header closeButton style={{ pointerEvents: 'none' }}>
+                <Modal centered show={props.isShown} onHide={props.close}>
+                    <Modal.Header closeButton>
                         <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body style={{ pointerEvents: 'none' }}>
-                            <p style={{ pointerEvents: 'none' }}>{i18next.t('areYouSure')}</p>
-                            <div className="align-items-center justify-content-end d-flex" style={{ pointerEvents: 'none' }}>
-                                <Button className="me-3 btn-secondary" onClick={() => props.close()} style={{ pointerEvents: 'none' }}>{i18next.t('cancelButton')}</Button>
+                    <Modal.Body>
+                            <p>{i18next.t('areYouSure')}</p>
+                            <div className="align-items-center justify-content-end d-flex">
+                                <Button className="me-3 btn-secondary" onClick={() => props.close()}>{i18next.t('cancelButton')}</Button>
                                 <Button variant='danger' type="button" onClick={() => {
                                     handleRemoveChannel();
                                     props.close();
-                                }}>
+                                }} style={{ zIndex: 9999 }}>
                                     {i18next.t('deleteButton')}
                                 </Button>
                             </div>
