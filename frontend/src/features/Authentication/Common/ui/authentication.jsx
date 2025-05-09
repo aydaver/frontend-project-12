@@ -20,7 +20,6 @@ i18next.init({
     },
 });
   
-
 const Authentication = (props) => {
 
     const { type } = props;
