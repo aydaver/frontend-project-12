@@ -112,7 +112,7 @@ const ChannelInput = (props) => {
                             {() => (
                                 <Form>
                                     <div className="form-group mt-3">
-                                        <label for="channelName">Имя канала</label>
+                                        <label htmlFor="channelName">Имя канала</label>
                                         <Field autoFocus type="text" id="channelName" name="channelName" className="form-control"/>
                                         <Error name="channelName">{(error) => <span className="text-danger">{error}</span>}</Error>
                                         <p className='text-danger'>{errorStatus}</p>

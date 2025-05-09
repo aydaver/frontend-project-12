@@ -36,7 +36,7 @@ const Authentication = (props) => {
     const handlePasswordCheck = () => {
         return type === 'signup' ? 
         <div className="form-group mb-4">
-            <label for="passwordCheck" className='w-100'>
+            <label htmlFor="passwordCheck" className='w-100'>
                 {i18next.t('passwordConfirmFormTitle')}
                 <Field id="passwordCheck" type="password" name="passwordCheck" className="form-control"/>
             </label>
@@ -69,7 +69,7 @@ const Authentication = (props) => {
                                     <div className="">
                                         <Form>
                                             <div className="form-group mb-4">
-                                                <label for="userName" className='w-100'>
+                                                <label htmlFor="userName" className='w-100'>
                                                     {type === 'signup' ? i18next.t('nickNameFormTitleSignUp') : i18next.t('nickNameFormTitleLogin')}
                                                     <Field id="userName" type="userName" name="userName" className="form-control"/>
                                                 </label>
@@ -77,7 +77,7 @@ const Authentication = (props) => {
                                                 <p className='text-danger my-0'>{errorState}</p>
                                             </div>
                                             <div className="form-group mb-4">
-                                                <label for="password" className='w-100'>
+                                                <label htmlFor="password" className='w-100'>
                                                     {i18next.t('passwordFormTitle')}
                                                     <Field id="password" type="password" name="password" className="form-control"/>
                                                 </label>
