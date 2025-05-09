@@ -59,7 +59,7 @@ const ConfirmModal = (props) => {
                             <Button className='me-2' type="button" variant='secondary' onClick={props.close}>
                                 {i18next.t('cancelButton')}
                             </Button>
-                            <Button style={{pointerEvents: 'none'}} type="button" variant='danger' onClick={() => {
+                            <Button style={{pointerEvents: 'none'}} type="submit" variant='danger' onClick={() => {
                                 handleRemoveChannel();
                                 props.close();
                             }}>
@@ -67,8 +67,6 @@ const ConfirmModal = (props) => {
                             </Button>
                         </div>
                     </div>
-
-
                 </Modal.Body>
                     
                 </Modal>
