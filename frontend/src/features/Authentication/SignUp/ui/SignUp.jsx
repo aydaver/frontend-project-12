@@ -1,7 +1,5 @@
-import Authentication from "../../Common/ui/authentication";
+import Authentication from '../../Common/ui/authentication';
 
-const SignUp = () => {
-    return <Authentication type="signup"/>
-}
+const SignUp = () => <Authentication type="signup" />;
 
 export default SignUp;
