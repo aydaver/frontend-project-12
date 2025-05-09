@@ -1,14 +1,14 @@
-import { Formik, Form, Field, ErrorMessage as Error } from 'formik';
-import { useState } from 'react';
-import { Button, Container, Row, Col, Image, Spinner } from 'react-bootstrap';
+import { Formik, Form, Field, ErrorMessage as Error } from 'formik'
+import { useState } from 'react'
+import { Button, Container, Row, Col, Image, Spinner } from 'react-bootstrap'
 import authOff from '../../../../assets/images/authOff.jpg'
-import { useNavigate } from 'react-router-dom';
-import CommonHeader from '../../../../common/ui/CommonHeader';
-import schemas from '../../../../common/helpers/validation';
-import { handleLogin } from '../../Login/model/handlers';
-import { handleSignUp } from '../../SignUp/model/handlers';
-import i18next from 'i18next';
-import russian from '../../../../common/locales/ru';
+import { useNavigate } from 'react-router-dom'
+import CommonHeader from '../../../../common/ui/CommonHeader'
+import schemas from '../../../../common/helpers/validation'
+import { handleLogin } from '../../Login/model/handlers'
+import { handleSignUp } from '../../SignUp/model/handlers'
+import i18next from 'i18next'
+import russian from '../../../../common/locales/ru'
 
 i18next.init({
     lng: 'ru',
@@ -18,7 +18,7 @@ i18next.init({
           russian,
       },
     },
-});
+})
   
 const Authentication = (props) => {
 

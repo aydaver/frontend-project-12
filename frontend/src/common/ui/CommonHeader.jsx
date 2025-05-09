@@ -1,8 +1,8 @@
-import { Row, Col, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { Row, Col, Button } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 const CommonHeader = ({ children }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return children ? (
     <Row className="py-2 mt-0 shadow-sm bg-white" sm={12} lg={12}>
@@ -41,7 +41,7 @@ const CommonHeader = ({ children }) => {
       </Col>
       <Col sm={2} lg={2} />
     </Row>
-  );
-};
+  )
+}
 
-export default CommonHeader;
+export default CommonHeader

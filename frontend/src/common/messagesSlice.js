@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable functional/no-expression-statement */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios'
 
 export const fetchMessages = createAsyncThunk(
 
@@ -11,7 +11,7 @@ export const fetchMessages = createAsyncThunk(
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
-    });
+    })
     return response.data;
   },
 );
@@ -26,29 +26,29 @@ const messagesSlice = createSlice({
 
   reducers: {
     addMessage: (state, action) => {
-      state.messages.push(action.payload);
+      state.messages.push(action.payload)
     },
     clearMessagesById: (state, action) => {
-      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id);
+      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id)
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMessages.pending, (state) => {
-      state.status = 'loading messages';
-      state.error = null;
-    });
+      state.status = 'loading messages'
+      state.error = null
+    })
 
     builder.addCase(fetchMessages.fulfilled, (state, action) => {
-      state.status = 'permission accepted for messages';
-      state.messages = action.payload.map((message) => ({ ...message, key: message.id }));
-    });
+      state.status = 'permission accepted for messages'
+      state.messages = action.payload.map((message) => ({ ...message, key: message.id }))
+    })
 
     builder.addCase(fetchMessages.rejected, (state) => {
-      state.status = 'permission denied';
-    });
+      state.status = 'permission denied'
+    })
   },
-});
+})
 
-export const { addMessage, clearMessagesById } = messagesSlice.actions;
+export const { addMessage, clearMessagesById } = messagesSlice.actions
 
-export default messagesSlice.reducer;
+export default messagesSlice.reducer
