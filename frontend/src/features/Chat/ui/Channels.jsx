@@ -99,26 +99,26 @@ const Channels = () => {
                 return (
                   <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap p-0" style={{ '--hover-color': 'red' }} key={channel.id} eventKey={channel.id}>
                     <button className={activeChannelId === channel.id ? 'text-start h-100 w-100 p-0 m-0 rounded btn btn-primary p-2' : 'text-start h-100 w-100 p-0 m-0 rounde btn btn-link text-decoration-none p-2'}>
-                  {`# ${channel.name}`}
-                </button>
+                      {`# ${channel.name}`}
+                    </button>
                   </Nav.Link>
                 )
               }
               return (
                 <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 p-0 flex-wrap" key={channel.id} eventKey={channel.id}>
                   <RemovableChannel
-                handleFormTypeAndModal={() => {
-                  setFormType('edit')
-                  setModalShown(true)
-                  setOldChannelName(channel.name)
-                }}
-                handleDeleteAcceptModal={() => setDeleteModalShown(true)}
-                channelId={channel.id}
-                activeChannelId={activeChannelId}
-                channelName={channel.name}
-              />
+                    handleFormTypeAndModal={() => {
+                      setFormType('edit')
+                      setModalShown(true)
+                      setOldChannelName(channel.name)
+                    }}
+                    handleDeleteAcceptModal={() => setDeleteModalShown(true)}
+                    channelId={channel.id}
+                    activeChannelId={activeChannelId}
+                    channelName={channel.name}
+                  />
                 </Nav.Link>
-              );
+              )
             })}
           </Nav>
         </Col>

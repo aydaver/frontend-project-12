@@ -33,7 +33,8 @@ const Authentication = (props) => {
           </label>
           <Error name="passwordCheck">{error => <span className="text-danger">{error}</span>}</Error>
         </div>
-      ) : null)
+      )
+    : null)
 
   return (
     <Container className="bg-black mw-100 h-100 my-0 px-0" sm={12} lg={12}>
@@ -76,21 +77,22 @@ const Authentication = (props) => {
                       <Button type="submit" className="w-100" disabled={isLoading}>
                         {isLoading
                           ? (
-                            <>
-                                <Spinner
-                                as="span"
-                                animation="border"
-                                size="sm"
-                                role="status"
-                                aria-hidden="true"
-                                className="me-2"
-                                />
-                                {' '}
-                                {
-                                type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
-                                }
-                            </>
-                            ) : (
+                              <>
+                                  <Spinner
+                                  as="span"
+                                  animation="border"
+                                  size="sm"
+                                  role="status"
+                                  aria-hidden="true"
+                                  className="me-2"
+                                  />
+                                  {' '}
+                                  {
+                                  type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
+                                  }
+                              </>
+                            )
+                            : (
                             type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')
                             )}
                       </Button>
