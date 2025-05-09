@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable functional/no-expression-statement */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from 'axios'
 
@@ -12,9 +10,9 @@ export const fetchMessages = createAsyncThunk(
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     })
-    return response.data;
+    return response.data
   },
-);
+)
 
 const messagesSlice = createSlice({
 
@@ -29,7 +27,7 @@ const messagesSlice = createSlice({
       state.messages.push(action.payload)
     },
     clearMessagesById: (state, action) => {
-      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id)
+      state.messages = state.messages.filter(message => message.channelId !== action.payload.id)
     },
   },
   extraReducers: (builder) => {
@@ -40,7 +38,7 @@ const messagesSlice = createSlice({
 
     builder.addCase(fetchMessages.fulfilled, (state, action) => {
       state.status = 'permission accepted for messages'
-      state.messages = action.payload.map((message) => ({ ...message, key: message.id }))
+      state.messages = action.payload.map(message => ({ ...message, key: message.id }))
     })
 
     builder.addCase(fetchMessages.rejected, (state) => {
