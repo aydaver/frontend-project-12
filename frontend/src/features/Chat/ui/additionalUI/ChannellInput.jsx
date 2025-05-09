@@ -42,10 +42,12 @@ const ChannelInput = (props) => {
 
         const token = localStorage.getItem('token');
 
+        const createdBy = localStorage.getItem('username');
+
         filter.loadDictionary('ru')
         filter.loadDictionary('en')
 
-        const newChannel = {name: filter.clean(values.channelName)};
+        const newChannel = {name: filter.clean(values.channelName), createdBy: createdBy};
 
         if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
             setErrorStatus('Должно быть уникальным');

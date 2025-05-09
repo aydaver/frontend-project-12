@@ -37,6 +37,8 @@ const Channels = () => {
 
     const dispatch = useDispatch();
 
+    const currentUser = localStorage.getItem('username')
+
 
     useEffect(() => {
         dispatch(fetchChannels())
@@ -45,11 +47,14 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
     
         socket.on('newChannel', (payload) => {
             dispatch(addChannel(payload));
-            setActiveChannelId(payload.id)
+            console.log(payload);
+            if (currentUser === payload.createdBy) {
+                setActiveChannelId(payload.id)
+            }
         });
     
         return () => {
@@ -60,7 +65,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
 
         socket.on('removeChannel', (payload) => {
             dispatch(removeChannel(payload));
@@ -72,7 +77,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
 
         socket.on('renameChannel', (payload) => {
             dispatch(renameChannel(payload));
@@ -98,6 +103,7 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                             setModalShown(true);
                         }}>+</Button>
                         <AddChannelInput close={() => setModalShown(false)} isShown={isModalShown} title={i18next.t('addChannelTitle')} buttonTitle={i18next.t('addButton')} formType={formType} channelId={activeChannelId} oldChannelName={oldChannelName}/>
+                        <ConfirmModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={activeChannelId}/>
                     </div>
                     <Nav variant="pills" className="flex-column w-100">
                         {channels.map((channel) => {
@@ -105,7 +111,7 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                                 return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap p-0" style={{'--hover-color':'red'}} key={channel.id} eventKey={channel.id}>
                                             <button className ={activeChannelId === channel.id ? "text-start h-100 w-100 p-0 m-0 rounded btn btn-primary p-2" : "text-start h-100 w-100 p-0 m-0 rounde btn btn-link text-decoration-none p-2"}>
                                                 {`# ${channel.name}`}
-                                            </button>
+                                            </button> 
                                         </Nav.Link>
                             } else {
                                 return  <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 p-0 flex-wrap" key={channel.id} eventKey={channel.id}>
@@ -118,7 +124,6 @@ return  <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-ex
                                             channelId={channel.id} 
                                             activeChannelId={activeChannelId} 
                                             channelName={channel.name}/>
-                                            <ConfirmModal isShown={isDeleteModalShown} close={() => setDeleteModalShown(false)} channelId={channel.id}/>
                                         </Nav.Link>
                             }
                         })

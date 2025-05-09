@@ -46,7 +46,7 @@ const ConfirmModal = (props) => {
     }
 
     return  <>
-                <Modal centered show={props.isShown} onHide={props.close} style={{ position: 'relative' }}>
+                <Modal size="md" aria-labelledby="example-modal-sizes-title-lg" centered show={props.isShown} onHide={props.close} style={{ position: 'fixed' }}>
                     <Modal.Header closeButton>
                         <Modal.Title>{i18next.t('deleteChannelTitle')}</Modal.Title>
                     </Modal.Header>
@@ -57,7 +57,7 @@ const ConfirmModal = (props) => {
                                 <Button variant='danger' type="button" onClick={() => {
                                     handleRemoveChannel();
                                     props.close();
-                                }} style={{ zIndex: 9999, position: 'relative' }}>
+                                }} style={{ position: 'relative' }}>
                                     {i18next.t('deleteButton')}
                                 </Button>
                             </div>

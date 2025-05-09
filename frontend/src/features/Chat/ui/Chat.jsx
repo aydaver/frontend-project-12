@@ -8,7 +8,6 @@ const Chat = () => {
     return  <div className="h-100">
                 <CommonHeader><ExitButton/></CommonHeader>
                 <ToastContainer
-                style={{ pointerEvents: 'none' }}
                 position="top-right"
                 autoClose={5000}
                 hideProgressBar={false}

@@ -29,6 +29,7 @@ const channelsSlice = createSlice({
                 id: action.payload.id,
                 name: action.payload.name,
                 removable: true,
+                createdBy: action.payload.createdBy,
             });
         },
         removeChannel(state, action) {
