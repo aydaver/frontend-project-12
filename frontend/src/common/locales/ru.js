@@ -30,4 +30,4 @@ export default {
   channelDeleted: 'Канал удалён',
   channelEdited: 'Канал переименован',
   channelAdded: 'Канал создан',
-};
+}

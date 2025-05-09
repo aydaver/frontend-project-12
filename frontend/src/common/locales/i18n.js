@@ -1,6 +1,6 @@
 /* eslint-disable functional/no-expression-statement */
-import i18next from 'i18next';
-import russian from './ru';
+import i18next from 'i18next'
+import russian from './ru'
 
 i18next.init({
   lng: 'ru',
@@ -10,6 +10,6 @@ i18next.init({
           russian,
     },
   },
-});
+})
 
-export default i18next;
+export default i18next
