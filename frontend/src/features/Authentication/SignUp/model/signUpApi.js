@@ -10,7 +10,7 @@ const signUp = async (credentials) => {
       },
     )
     return response.data
-  } 
+  }
   catch (error) {
     console.log(error)
     throw error

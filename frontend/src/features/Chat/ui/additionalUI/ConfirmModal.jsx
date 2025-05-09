@@ -19,7 +19,7 @@ const ConfirmModal = (props) => {
         progress: undefined,
         theme: 'light',
       })
-    } 
+    }
     catch {
       toast.error(i18next.t('connectionError'), {
         position: 'top-right',
@@ -47,9 +47,9 @@ const ConfirmModal = (props) => {
             variant="danger"
             type="button"
             onClick={() => {
-  handleRemoveChannel()
-  props.close()
-}}
+              handleRemoveChannel()
+              props.close()
+            }}
             style={{ position: 'relative' }}
           >
             {i18next.t('deleteButton')}

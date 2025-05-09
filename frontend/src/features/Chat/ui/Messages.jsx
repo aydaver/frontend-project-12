@@ -26,7 +26,7 @@ const Messages = (props) => {
   useEffect(() => {
     const socket = io('ws://localhost:5001')
 
-    socket.on('newMessage', payload => {
+    socket.on('newMessage', (payload) => {
       dispatch(addMessage(payload))
     })
 
@@ -53,7 +53,7 @@ const Messages = (props) => {
         <div className="h-100 d-flex flex-column">
           <div ref={scrollContainerRef} className="overflow-auto flex-grow-1 px-3 pt-3 pb-0">
             <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
-              {filteredMessages.map((message) => (
+              {filteredMessages.map(message => (
                 <li key={message.id}>
                   <span className="d-flex">
                     <h5 className="pe-1 mb-0 pt-1">{`${message.username}:`}</h5>

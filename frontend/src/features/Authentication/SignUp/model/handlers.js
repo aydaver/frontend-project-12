@@ -16,7 +16,7 @@ export const handleSignUp = async (credentials, navigate, setError, setImage, se
       localStorage.setItem('username', data.username)
       navigate('/')
     }, 1000)
-  } 
+  }
   catch (error) {
     if (error.status === 409) {
       setTimeout(() => {
