@@ -6,20 +6,10 @@ import { Button, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import filter from 'leo-profanity'
-import i18next from 'i18next'
+import i18next from '../../../../common/locales/i18n'
 import { channelPost, channelEdit } from '../../model/channelsApi'
 import schemas from '../../../../common/helpers/validation'
-import russian from '../../../../common/locales/ru'
 
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
 
 const ChannelInput = (props) => {
   const connectionErrorToast = () => {
@@ -37,7 +27,7 @@ const ChannelInput = (props) => {
 
   const [errorStatus, setErrorStatus] = useState('')
 
-  const channelsExist = useSelector((state) => state.channels.channels)
+  const channelsExist = useSelector(state => state.channels.channels)
 
   const handleSubmit = async (values) => {
     const token = localStorage.getItem('token')
@@ -49,9 +39,10 @@ const ChannelInput = (props) => {
 
     const newChannel = { name: filter.clean(values.channelName), createdBy }
 
-    if (channelsExist.filter((channel) => channel.name === newChannel.name).length !== 0) {
+    if (channelsExist.filter(channel => channel.name === newChannel.name).length !== 0) {
       setErrorStatus('Должно быть уникальным')
-    } else {
+    } 
+    else {
       if (props.formType === 'add') {
         try {
           await channelPost(newChannel, token)
@@ -65,10 +56,12 @@ const ChannelInput = (props) => {
             progress: undefined,
             theme: 'light',
           })
-        } catch {
+        } 
+        catch {
           connectionErrorToast()
         }
-      } else if (props.formType === 'edit') {
+      } 
+      else if (props.formType === 'edit') {
         try {
           await channelEdit(props.channelId, newChannel, token)
           toast.success(i18next.t('channelEdited'), {
@@ -81,7 +74,8 @@ const ChannelInput = (props) => {
             progress: undefined,
             theme: 'light',
           })
-        } catch {
+        } 
+        catch {
           connectionErrorToast()
         }
       }
@@ -108,7 +102,7 @@ const ChannelInput = (props) => {
           initialValues={{
             channelName: props.formType === 'edit' ? props.oldChannelName : '',
           }}
-          onSubmit={(values) => handleSubmit(values)}
+          onSubmit={values => handleSubmit(values)}
           validationSchema={schemas.channel}
         >
           {() => (
@@ -123,7 +117,7 @@ const ChannelInput = (props) => {
                 <Button className="me-3 btn-secondary" onClick={() => props.close()}>{i18next.t('cancelButton')}</Button>
                 <Button type="submit" className="">
                     {props.formType === 'add' ? i18next.t('addButton') : i18next.t('renameButton')}
-                  </Button>
+                </Button>
               </div>
             </Form>
           )}

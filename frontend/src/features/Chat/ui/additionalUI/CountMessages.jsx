@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { countMessages } from '../../model/messageCounter'
 
 const CountMessages = (props) => {
-  const messages = useSelector((state) => state.messages.messages)
+  const messages = useSelector(state => state.messages.messages)
 
   return (
     <span>

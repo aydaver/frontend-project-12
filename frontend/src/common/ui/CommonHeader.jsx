@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom'
 const CommonHeader = ({ children }) => {
   const navigate = useNavigate()
 
-  return children ? (
+  return children 
+    ? (
     <Row className="py-2 mt-0 shadow-sm bg-white" sm={12} lg={12}>
       <Col sm={1} lg={1} />
       <Col className="justify-content-center align-content-center" sm={9} lg={9}>
@@ -21,7 +22,8 @@ const CommonHeader = ({ children }) => {
       </Col>
       <Col sm={2} lg={2}>{children}</Col>
     </Row>
-  ) : (
+  ) 
+  : (
     <Row className="py-3 mt-0 shadow-sm bg-white" sm={12} lg={12}>
       <Col sm={1} lg={1} />
       <Col className="justify-content-center" sm={9} lg={9}>

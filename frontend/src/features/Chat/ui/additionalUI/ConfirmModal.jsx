@@ -1,18 +1,7 @@
 import { Modal, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import i18next from 'i18next'
+import i18next from '../../../../common/locales/i18n'
 import { channelRemove } from '../../model/channelsApi'
-import russian from '../../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
 
 const ConfirmModal = (props) => {
   const token = localStorage.getItem('token')
@@ -30,7 +19,8 @@ const ConfirmModal = (props) => {
         progress: undefined,
         theme: 'light',
       })
-    } catch {
+    } 
+    catch {
       toast.error(i18next.t('connectionError'), {
         position: 'top-right',
         autoClose: 5000,

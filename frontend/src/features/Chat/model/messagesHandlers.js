@@ -1,7 +1,7 @@
 import filter from 'leo-profanity'
 import messagePost from './messagesApi'
 
-export const handleText = (setText) => (e) => {
+export const handleText = setText => (e) => {
   setText(e.target.value)
 }
 

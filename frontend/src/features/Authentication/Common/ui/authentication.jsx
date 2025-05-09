@@ -26,15 +26,14 @@ const Authentication = (props) => {
 
   const handlePasswordCheck = () => (type === 'signup'
     ? (
-      <div className="form-group mb-4">
-        <label htmlFor="passwordCheck" className="w-100">
-          {i18next.t('passwordConfirmFormTitle')}
-          <Field id="passwordCheck" type="password" name="passwordCheck" className="form-control" />
-        </label>
-        <Error name="passwordCheck">{(error) => <span className="text-danger">{error}</span>}</Error>
-      </div>
-    )
-    : null)
+        <div className="form-group mb-4">
+          <label htmlFor="passwordCheck" className="w-100">
+            {i18next.t('passwordConfirmFormTitle')}
+            <Field id="passwordCheck" type="password" name="passwordCheck" className="form-control" />
+          </label>
+          <Error name="passwordCheck">{error => <span className="text-danger">{error}</span>}</Error>
+        </div>
+    ) : null)
 
   return (
     <Container className="bg-black mw-100 h-100 my-0 px-0" sm={12} lg={12}>
@@ -52,7 +51,7 @@ const Authentication = (props) => {
                   userName: '',
                   password: '',
                 }}
-                onSubmit={async (values) => (type === 'signup' ? await handleSignUp(values, navigate, setError, setImage, setIsLoading) : await handleLogin(values, navigate, setError, setImage, setIsLoading))}
+                onSubmit={async values => (type === 'signup' ? await handleSignUp(values, navigate, setError, setImage, setIsLoading) : await handleLogin(values, navigate, setError, setImage, setIsLoading))}
                 validationSchema={type === 'signup' ? schemas.signup : schemas.login}
               >
                 {() => (
@@ -63,7 +62,7 @@ const Authentication = (props) => {
                           {type === 'signup' ? i18next.t('nickNameFormTitleSignUp') : i18next.t('nickNameFormTitleLogin')}
                           <Field id="userName" type="userName" name="userName" className="form-control" />
                         </label>
-                        <Error id="userName" name="userName">{(error) => <span className="text-danger">{error}</span>}</Error>
+                        <Error id="userName" name="userName">{error => <span className="text-danger">{error}</span>}</Error>
                         <p className="text-danger my-0">{errorState}</p>
                       </div>
                       <div className="form-group mb-4">
@@ -71,11 +70,12 @@ const Authentication = (props) => {
                           {i18next.t('passwordFormTitle')}
                           <Field id="password" type="password" name="password" className="form-control" />
                         </label>
-                        <Error id="password" name="password">{(error) => <span className="text-danger">{error}</span>}</Error>
+                        <Error id="password" name="password">{error => <span className="text-danger">{error}</span>}</Error>
                       </div>
                       {handlePasswordCheck()}
                       <Button type="submit" className="w-100" disabled={isLoading}>
-                        {isLoading ? (
+                        {isLoading 
+                        ? (
                           <>
                             <Spinner
                               as="span"
@@ -87,8 +87,8 @@ const Authentication = (props) => {
                             />
                             {' '}
                             {
-                                                    type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
-                                                    }
+                              type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
+                            }
                           </>
                         ) : (
                           type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')

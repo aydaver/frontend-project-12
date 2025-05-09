@@ -14,7 +14,8 @@ export const handleLogin = async (credentials, navigate, setError, setImage, set
       localStorage.setItem('username', data.username)
       navigate('/')
     }, 1000)
-  } catch (error) {
+  } 
+  catch (error) {
     if (error.status === 401) {
       setTimeout(() => {
         setIsLoading(false)

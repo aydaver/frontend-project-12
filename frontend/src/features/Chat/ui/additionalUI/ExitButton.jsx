@@ -1,17 +1,6 @@
 import { Button } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
-import i18next from 'i18next'
-import russian from '../../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
+import i18next from '../../../../common/locales/i18n'
 
 const ExitButton = () => {
   const navigate = useNavigate()

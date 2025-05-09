@@ -1,90 +1,79 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { io } from 'socket.io-client'
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { io } from 'socket.io-client';
 import {
   Row, Col, Nav, Tab, Button,
-} from 'react-bootstrap'
-import i18next from 'i18next'
+} from 'react-bootstrap';
+import i18next from '../../../common/locales/i18n';
 import {
   fetchChannels, addChannel, removeChannel, renameChannel,
-} from '../../../common/channelsSlice'
-import { clearMessagesById } from '../../../common/messagesSlice'
-import Messages from './Messages'
-import AddChannelInput from './additionalUI/ChannellInput'
-import RemovableChannel from './additionalUI/RemovableChannel'
-import ConfirmModal from './additionalUI/ConfirmModal'
-import russian from '../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
+} from '../../../common/channelsSlice';
+import { clearMessagesById } from '../../../common/messagesSlice';
+import Messages from './Messages';
+import AddChannelInput from './additionalUI/ChannellInput';
+import RemovableChannel from './additionalUI/RemovableChannel';
+import ConfirmModal from './additionalUI/ConfirmModal';
 
 const Channels = () => {
-  const [formType, setFormType] = useState('add')
+  const [formType, setFormType] = useState('add');
 
-  const [activeChannelId, setActiveChannelId] = useState('1')
+  const [activeChannelId, setActiveChannelId] = useState('1');
 
-  const [isModalShown, setModalShown] = useState(false)
+  const [isModalShown, setModalShown] = useState(false);
 
-  const [oldChannelName, setOldChannelName] = useState('')
+  const [oldChannelName, setOldChannelName] = useState('');
 
-  const [isDeleteModalShown, setDeleteModalShown] = useState(false)
+  const [isDeleteModalShown, setDeleteModalShown] = useState(false);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const currentUser = localStorage.getItem('username')
-
-  useEffect(() => {
-    dispatch(fetchChannels())
-  }, [])
+  const currentUser = localStorage.getItem('username');
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    dispatch(fetchChannels());
+  }, []);
+
+  useEffect(() => {
+    const socket = io('ws://localhost:5001');
 
     socket.on('newChannel', (payload) => {
-      dispatch(addChannel(payload))
-      console.log(payload)
+      dispatch(addChannel(payload));
+      console.log(payload);
       if (currentUser === payload.createdBy) {
-        setActiveChannelId(payload.id)
+        setActiveChannelId(payload.id);
       }
-    })
+    });
 
     return () => {
-      socket.off('newChannel')
-    }
-  }, [])
+      socket.off('newChannel');
+    };
+  }, []);
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('ws://localhost:5001');
 
     socket.on('removeChannel', (payload) => {
-      dispatch(removeChannel(payload))
-      dispatch(clearMessagesById(payload))
-      setActiveChannelId('1')
-    })
-  }, [])
+      dispatch(removeChannel(payload));
+      dispatch(clearMessagesById(payload));
+      setActiveChannelId('1');
+    });
+  }, []);
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('ws://localhost:5001');
 
     socket.on('renameChannel', (payload) => {
-      dispatch(renameChannel(payload))
-    })
-  }, [])
+      dispatch(renameChannel(payload));
+    });
+  }, []);
 
   const handleMessages = (channelId, channelName) => {
     if (activeChannelId === channelId) {
-      return <Messages channelId={channelId} channelName={channelName} />
+      return <Messages channelId={channelId} channelName={channelName} />;
     }
-  }
+  };
 
-  const channels = useSelector((state) => state.channels.channels)
+  const channels = useSelector((state) => state.channels.channels);
 
   return (
     <Tab.Container activeKey={activeChannelId} className="" id="left-tabs-example" defaultActiveKey={activeChannelId}>
@@ -95,8 +84,8 @@ const Channels = () => {
             <Button
               className="btn btn-primary"
               onClick={() => {
-                setFormType('add')
-                setModalShown(true)
+                setFormType('add');
+                setModalShown(true);
               }}
             >
               +
@@ -110,24 +99,24 @@ const Channels = () => {
                 return (
                   <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 flex-wrap p-0" style={{ '--hover-color': 'red' }} key={channel.id} eventKey={channel.id}>
                     <button className={activeChannelId === channel.id ? 'text-start h-100 w-100 p-0 m-0 rounded btn btn-primary p-2' : 'text-start h-100 w-100 p-0 m-0 rounde btn btn-link text-decoration-none p-2'}>
-                  {`# ${channel.name}`}
-                </button>
+                      {`# ${channel.name}`}
+                    </button>
                   </Nav.Link>
-                )
+                );
               }
               return (
                 <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 p-0 flex-wrap" key={channel.id} eventKey={channel.id}>
                   <RemovableChannel
-                handleFormTypeAndModal={() => {
-                  setFormType('edit')
-                  setModalShown(true)
-                  setOldChannelName(channel.name)
-                }}
-                handleDeleteAcceptModal={() => setDeleteModalShown(true)}
-                channelId={channel.id}
-                activeChannelId={activeChannelId}
-                channelName={channel.name}
-              />
+                    handleFormTypeAndModal={() => {
+                      setFormType('edit');
+                      setModalShown(true);
+                      setOldChannelName(channel.name);
+                    }}
+                    handleDeleteAcceptModal={() => setDeleteModalShown(true)}
+                    channelId={channel.id}
+                    activeChannelId={activeChannelId}
+                    channelName={channel.name}
+                  />
                 </Nav.Link>
               );
             })}
@@ -144,7 +133,7 @@ const Channels = () => {
         </Col>
       </Row>
     </Tab.Container>
-  )
-}
+  );
+};
 
-export default Channels
+export default Channels;

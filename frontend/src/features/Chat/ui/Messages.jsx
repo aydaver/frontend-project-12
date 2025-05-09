@@ -3,30 +3,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   useEffect, useState, useMemo, useRef,
 } from 'react'
-import i18next from 'i18next'
+import i18next from '../../../common/locales/i18n'
 import { addMessage, fetchMessages } from '../../../common/messagesSlice'
 import { handleText, handleSubmit } from '../model/messagesHandlers'
 import CountMessages from './additionalUI/CountMessages'
-import russian from '../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
 
 const Messages = (props) => {
   const { channelId, channelName } = props
 
   const [text, setText] = useState('')
 
-  const messages = useSelector((state) => state.messages.messages)
+  const messages = useSelector(state => state.messages.messages)
 
-  const filteredMessages = useMemo(() => messages.filter((message) => message.channelId === props.channelId), [messages, props.channelId])
+  const filteredMessages = useMemo(() => messages.filter(message => message.channelId === props.channelId), [messages, props.channelId])
 
   const dispatch = useDispatch()
 
@@ -37,7 +26,7 @@ const Messages = (props) => {
   useEffect(() => {
     const socket = io('ws://localhost:5001')
 
-    socket.on('newMessage', (payload) => {
+    socket.on('newMessage', payload => {
       dispatch(addMessage(payload))
     })
 

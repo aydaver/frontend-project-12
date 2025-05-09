@@ -1,17 +1,6 @@
-import i18next from 'i18next'
+import i18next from '../../../../common/locales/i18n'
 import signUp from './signUpApi'
 import authOn from '../../../../assets/images/authOn.jpg'
-import russian from '../../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
 
 export const handleSignUp = async (credentials, navigate, setError, setImage, setIsLoading) => {
   setIsLoading(true)
@@ -27,7 +16,8 @@ export const handleSignUp = async (credentials, navigate, setError, setImage, se
       localStorage.setItem('username', data.username)
       navigate('/')
     }, 1000)
-  } catch (error) {
+  } 
+  catch (error) {
     if (error.status === 409) {
       setTimeout(() => {
         setIsLoading(false)

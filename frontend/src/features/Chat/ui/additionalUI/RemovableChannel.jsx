@@ -1,17 +1,6 @@
 import { useState, useEffect } from 'react'
 import { ButtonGroup, Button, Dropdown } from 'react-bootstrap'
-import i18next from 'i18next'
-import russian from '../../../../common/locales/ru'
-
-i18next.init({
-  lng: 'ru',
-  resources: {
-    ru: {
-      translation:
-          russian,
-    },
-  },
-})
+import i18next from '../../../../common/locales/i18n'
 
 const RemovableChannel = (props) => {
   const [isActive, setActive] = useState()
@@ -25,7 +14,8 @@ const RemovableChannel = (props) => {
     <Dropdown as={ButtonGroup} className={isActive ? 'w-100 btn btn-primary p-0' : 'w-100 p-0'}>
       <div className="w-100 m-0 p-0 d-flex justify-content-between">
         <button
-          className={isActive ? 'p-0 h-100 text-start w-100 btn btn-primary p-2 text-decoration-none'
+          className={isActive 
+            ? 'p-0 h-100 text-start w-100 btn btn-primary p-2 text-decoration-none'
             : 'p-0 h-100 text-start w-100 btn btn-link p-2 text-decoration-none'}
         >
           <span
