@@ -8,7 +8,7 @@ const signUp = async (credentials) => {
         username: credentials.userName,
         password: credentials.password,
       },
-    );
+    )
     return response.data
   } catch (error) {
     console.log(error)

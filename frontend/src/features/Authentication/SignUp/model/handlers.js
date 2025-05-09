@@ -30,7 +30,7 @@ export const handleSignUp = async (credentials, navigate, setError, setImage, se
   } catch (error) {
     if (error.status === 409) {
       setTimeout(() => {
-        setIsLoading(false);
+        setIsLoading(false)
       }, 500)
       setError(i18next.t('userExist'))
     }

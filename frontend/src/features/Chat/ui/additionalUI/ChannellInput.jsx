@@ -64,7 +64,7 @@ const ChannelInput = (props) => {
             draggable: true,
             progress: undefined,
             theme: 'light',
-          });
+          })
         } catch {
           connectionErrorToast()
         }

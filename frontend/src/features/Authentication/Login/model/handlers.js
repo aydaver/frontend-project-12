@@ -5,10 +5,10 @@ export const handleLogin = async (credentials, navigate, setError, setImage, set
   setIsLoading(true)
   setError('')
   try {
-    const data = await login(credentials);
+    const data = await login(credentials)
     setTimeout(() => {
       setImage(authOn)
-    }, 500);
+    }, 500)
     setTimeout(() => {
       localStorage.setItem('token', data.token)
       localStorage.setItem('username', data.username)

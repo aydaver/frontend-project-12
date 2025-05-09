@@ -113,7 +113,7 @@ const Channels = () => {
                   {`# ${channel.name}`}
                 </button>
                   </Nav.Link>
-                );
+                )
               }
               return (
                 <Nav.Link onClick={() => setActiveChannelId(channel.id)} className="w-100 p-0 flex-wrap" key={channel.id} eventKey={channel.id}>
