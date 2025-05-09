@@ -1,19 +1,8 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from 'react-router-dom';
 
 const PrivateRoute = ({ children }) => {
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token");
-
-    if (token) {
-        return children;
-    } 
-
-    useEffect(() => { 
-        navigate('/login') 
-    }, [navigate])
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

@@ -1,19 +1,19 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable functional/no-expression-statement */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchMessages = createAsyncThunk(
 
-    'messages/fetchMessages',
-    async () => {
-       const response = await axios.get('/api/v1/messages', {
-        headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-    }).then((response) => {
-        return response.data;
-    })
+  'messages/fetchMessages',
+  async () => {
+    const response = await axios.get('/api/v1/messages', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
     return response;
-    },
+  },
 );
 
 const messagesSlice = createSlice({
@@ -26,25 +26,24 @@ const messagesSlice = createSlice({
       state.messages.push(action.payload);
     },
     clearMessagesById: (state, action) => {
-      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id)
+      state.messages = state.messages.filter((message) => message.channelId !== action.payload.id);
     },
   },
   extraReducers: (builder) => {
-  
-          builder.addCase(fetchMessages.pending, (state) => {
-              state.status = 'loading messages';
-              state.error = null;
-          });
-  
-          builder.addCase(fetchMessages.fulfilled, (state, action) => {
-              state.status = 'permission accepted for messages';
-              state.messages = action.payload.map((message) => ({...message, key: message.id}));
-          });
-  
-          builder.addCase(fetchMessages.rejected, (state) => {
-              state.status = 'permission denied';
-          });
-      }
+    builder.addCase(fetchMessages.pending, (state) => {
+      state.status = 'loading messages';
+      state.error = null;
+    });
+
+    builder.addCase(fetchMessages.fulfilled, (state, action) => {
+      state.status = 'permission accepted for messages';
+      state.messages = action.payload.map((message) => ({ ...message, key: message.id }));
+    });
+
+    builder.addCase(fetchMessages.rejected, (state) => {
+      state.status = 'permission denied';
+    });
+  },
 });
 
 export const { addMessage, clearMessagesById } = messagesSlice.actions;

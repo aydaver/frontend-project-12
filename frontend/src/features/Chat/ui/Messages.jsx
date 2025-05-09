@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+
 import { io } from "socket.io-client";
 import { addMessage, fetchMessages } from '../../../common/messagesSlice';
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +41,7 @@ const Messages = (props) => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
 
         socket.on('newMessage', (payload) => {
             dispatch(addMessage(payload));

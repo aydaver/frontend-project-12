@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { fetchChannels, addChannel, removeChannel, renameChannel } from "../../../common/channelsSlice";
 import { useDispatch } from 'react-redux';
@@ -47,7 +46,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
     
         socket.on('newChannel', (payload) => {
             dispatch(addChannel(payload));
@@ -65,7 +64,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
 
         socket.on('removeChannel', (payload) => {
             dispatch(removeChannel(payload));
@@ -77,7 +76,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5001");
+        const socket = io("ws://localhost:5002");
 
         socket.on('renameChannel', (payload) => {
             dispatch(renameChannel(payload));

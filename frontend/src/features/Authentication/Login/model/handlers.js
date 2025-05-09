@@ -6,7 +6,6 @@ export const handleLogin = async ( credentials, navigate, setError, setImage, se
     setError('');
     try {
         const data = await login(credentials);
-        console.log(data);
         setTimeout(() => {
             setImage(authOn);
         }, 500)
