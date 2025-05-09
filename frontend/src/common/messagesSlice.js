@@ -12,15 +12,18 @@ export const fetchMessages = createAsyncThunk(
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     });
-    return response;
+    return response.data;
   },
 );
 
 const messagesSlice = createSlice({
+
   name: 'messages',
+
   initialState: {
     messages: [],
   },
+
   reducers: {
     addMessage: (state, action) => {
       state.messages.push(action.payload);

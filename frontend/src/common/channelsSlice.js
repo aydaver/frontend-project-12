@@ -15,6 +15,7 @@ export const fetchChannels = createAsyncThunk(
     return response.data;
   },
 );
+
 const channelsSlice = createSlice({
 
   name: 'channels',
