@@ -78,22 +78,22 @@ const Authentication = (props) => {
                         {isLoading
                           ? (
                               <>
-                                  <Spinner
-                                  as="span"
-                                  animation="border"
-                                  size="sm"
-                                  role="status"
-                                  aria-hidden="true"
-                                  className="me-2"
-                                  />
-                                  {' '}
-                                  {
+                                <Spinner
+                                as="span"
+                                animation="border"
+                                size="sm"
+                                role="status"
+                                aria-hidden="true"
+                                className="me-2"
+                                />
+                                {' '}
+                                {
                                   type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
-                                  }
+                                }
                               </>
                             )
-                            : (
-                            type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')
+                          : (
+                              type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')
                             )}
                       </Button>
                     </Form>
