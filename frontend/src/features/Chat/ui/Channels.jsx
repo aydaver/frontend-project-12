@@ -46,7 +46,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5002");
+        const socket = io("ws://localhost:5001");
     
         socket.on('newChannel', (payload) => {
             dispatch(addChannel(payload));
@@ -64,7 +64,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5002");
+        const socket = io("ws://localhost:5001");
 
         socket.on('removeChannel', (payload) => {
             dispatch(removeChannel(payload));
@@ -76,7 +76,7 @@ const Channels = () => {
 
     useEffect(() => {
 
-        const socket = io("ws://localhost:5002");
+        const socket = io("ws://localhost:5001");
 
         socket.on('renameChannel', (payload) => {
             dispatch(renameChannel(payload));
