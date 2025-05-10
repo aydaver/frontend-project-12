@@ -10,7 +10,7 @@ export const channelPost = async (newChannel, token) => {
     })
     channelAddedToast()
   }
-  catch (error) {
+  catch {
     connectionErrorToast()
   }
 }
@@ -18,13 +18,13 @@ export const channelPost = async (newChannel, token) => {
 export const channelEdit = async (channelId, newChannel, token) => {
   try {
     await axios.patch(`/api/v1/channels/${channelId}`, newChannel, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
     channelEditedToast()
   }
-  catch (error) {
+  catch {
     connectionErrorToast()
   }
 }
@@ -32,13 +32,13 @@ export const channelEdit = async (channelId, newChannel, token) => {
 export const channelRemove = async (channelId, token) => {
   try {
     await axios.delete(`/api/v1/channels/${channelId}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
     channelDeletedToast()
   }
-  catch (error) {
+  catch {
     connectionErrorToast()
   }
 }
