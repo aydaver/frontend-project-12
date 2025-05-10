@@ -100,9 +100,12 @@ const Authentication = (props) => {
                 )}
               </Formik>
             </Col>
-            <Col className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100">
-              <p className="my-0">{type === 'signup' ? 'Есть аккаунт?' : 'Нет аккаунта?'}</p>
-              <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate(type === 'signup' ? '/login' : '/signup') }}>{type === 'signup' ? i18next.t('loginTitle') : i18next.t('signupTitle')}</Button>
+            <Col
+              className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100" 
+              style={{ visibility: type === 'login' ? 'visible' : 'hidden' }}
+            >
+              <p className="my-0">{i18next.t('noAccountQuestion')}</p>
+              <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate('/signup') }}>{i18next.t('signupTitle')}</Button>
             </Col>
           </Row>
         </Col>
