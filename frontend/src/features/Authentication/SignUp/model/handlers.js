@@ -1,5 +1,5 @@
 import i18next from '../../../../common/locales/i18n'
-import connectionErrorToast from '../../../Chat/ui/additionalUI/Toasts'
+import { connectionErrorToast } from '../../../Chat/ui/additionalUI/Toasts'
 import signUp from './signUpApi'
 
 export const handleSignUp = async (credentials, navigate, setError, setIsLoading) => {

@@ -8,7 +8,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import i18next from '../../../../common/locales/i18n'
 import loginIcon from '../../../../assets/images/avatar.jpg'
-import signUpIcon from '../../../../assets/images/avatar1.jpg'
+import signUpIcon from '../../../../assets/images/avatar_1.jpg'
 import CommonHeader from '../../../../common/ui/CommonHeader'
 import schemas from '../../../../common/helpers/validation'
 import { handleLogin } from '../../Login/model/handlers'

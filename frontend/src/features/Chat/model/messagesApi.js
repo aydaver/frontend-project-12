@@ -1,5 +1,5 @@
 import axios from 'axios'
-import connectionErrorToast from '../ui/additionalUI/Toasts'
+import { connectionErrorToast } from '../ui/additionalUI/Toasts'
 
 const messagePost = (newMessage, token) => {
   try {

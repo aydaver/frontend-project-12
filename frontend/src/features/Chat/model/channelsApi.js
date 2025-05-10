@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { connectionErrorToast, channelAddedToast, channelEditedToast, channelDeletedToast } from './Toasts'
+import { connectionErrorToast, channelAddedToast, channelEditedToast, channelDeletedToast } from '../ui/additionalUI/Toasts'
 
 export const channelPost = async (newChannel, token) => {
   try {

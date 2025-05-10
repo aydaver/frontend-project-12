@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify'
+import i18next from '../../../../common/locales/i18n'
 
 const connectionErrorToast = () => {
   toast.error(i18next.t('connectionError'), {

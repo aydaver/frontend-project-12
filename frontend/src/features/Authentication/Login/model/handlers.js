@@ -1,5 +1,5 @@
 import login from './loginApi'
-import connectionErrorToast from '../ui/additionalUI/Toasts'
+import { connectionErrorToast } from '../../../Chat/ui/additionalUI/Toasts'
 
 export const handleLogin = async (credentials, navigate, setError, setIsLoading) => {
   setIsLoading(true)
