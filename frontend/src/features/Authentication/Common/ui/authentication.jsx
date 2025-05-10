@@ -101,7 +101,7 @@ const Authentication = (props) => {
               </Formik>
             </Col>
             <Col
-              className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100" 
+              className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100"
               style={{ visibility: type === 'login' ? 'visible' : 'hidden' }}
             >
               <p className="my-0">{i18next.t('noAccountQuestion')}</p>
