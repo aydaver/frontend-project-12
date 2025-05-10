@@ -1,19 +1,14 @@
 import login from './loginApi'
-import authOn from '../../../../assets/images/authOn.jpg'
+import connectionErrorToast from '../ui/additionalUI/Toasts'
 
-export const handleLogin = async (credentials, navigate, setError, setImage, setIsLoading) => {
+export const handleLogin = async (credentials, navigate, setError, setIsLoading) => {
   setIsLoading(true)
   setError('')
   try {
     const data = await login(credentials)
-    setTimeout(() => {
-      setImage(authOn)
-    }, 500)
-    setTimeout(() => {
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('username', data.username)
-      navigate('/')
-    }, 1000)
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('username', data.username)
+    navigate('/')
   }
   catch (error) {
     if (error.status === 401) {
@@ -22,5 +17,6 @@ export const handleLogin = async (credentials, navigate, setError, setImage, set
       }, 500)
       setError('Неверные имя пользователя или пароль')
     }
+    connectionErrorToast()
   }
 }

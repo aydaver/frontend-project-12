@@ -1,21 +1,15 @@
 import i18next from '../../../../common/locales/i18n'
+import connectionErrorToast from '../../../Chat/ui/additionalUI/Toasts'
 import signUp from './signUpApi'
-import authOn from '../../../../assets/images/authOn.jpg'
 
-export const handleSignUp = async (credentials, navigate, setError, setImage, setIsLoading) => {
+export const handleSignUp = async (credentials, navigate, setError, setIsLoading) => {
   setIsLoading(true)
   setError('')
   try {
     const data = await signUp(credentials)
-    console.log(data)
-    setTimeout(() => {
-      setImage(authOn)
-    }, 500)
-    setTimeout(() => {
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('username', data.username)
-      navigate('/')
-    }, 1000)
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('username', data.username)
+    navigate('/')
   }
   catch (error) {
     if (error.status === 409) {
@@ -24,5 +18,6 @@ export const handleSignUp = async (credentials, navigate, setError, setImage, se
       }, 500)
       setError(i18next.t('userExist'))
     }
+    connectionErrorToast()
   }
 }

@@ -4,26 +4,12 @@ import {
 } from 'formik'
 import { Button, Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
-import { toast } from 'react-toastify'
 import filter from 'leo-profanity'
 import i18next from '../../../../common/locales/i18n'
 import { channelPost, channelEdit } from '../../model/channelsApi'
 import schemas from '../../../../common/helpers/validation'
 
 const ChannelInput = (props) => {
-  const connectionErrorToast = () => {
-    toast.error(i18next.t('connectionError'), {
-      position: 'top-right',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-    })
-  }
-
   const [errorStatus, setErrorStatus] = useState('')
 
   const channelsExist = useSelector(state => state.channels.channels)
@@ -43,40 +29,10 @@ const ChannelInput = (props) => {
     }
     else {
       if (props.formType === 'add') {
-        try {
-          await channelPost(newChannel, token)
-          toast.success(i18next.t('channelAdded'), {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-          })
-        }
-        catch {
-          connectionErrorToast()
-        }
+        channelPost(newChannel, token)
       }
       else if (props.formType === 'edit') {
-        try {
-          await channelEdit(props.channelId, newChannel, token)
-          toast.success(i18next.t('channelEdited'), {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: false,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light',
-          })
-        }
-        catch {
-          connectionErrorToast()
-        }
+        channelEdit(props.channelId, newChannel, token)
       }
       props.close()
       setErrorStatus('')

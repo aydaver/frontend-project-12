@@ -1,4 +1,5 @@
 import axios from 'axios'
+import connectionErrorToast from '../ui/additionalUI/Toasts'
 
 const signUp = async (credentials) => {
   try {
@@ -11,9 +12,8 @@ const signUp = async (credentials) => {
     )
     return response.data
   }
-  catch (error) {
-    console.log(error)
-    throw error
+  catch {
+    connectionErrorToast()
   }
 }
 

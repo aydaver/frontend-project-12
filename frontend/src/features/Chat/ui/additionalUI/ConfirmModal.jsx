@@ -1,37 +1,12 @@
 import { Modal, Button } from 'react-bootstrap'
-import { toast } from 'react-toastify'
 import i18next from '../../../../common/locales/i18n'
 import { channelRemove } from '../../model/channelsApi'
 
 const ConfirmModal = (props) => {
   const token = localStorage.getItem('token')
 
-  const handleRemoveChannel = async () => {
-    try {
-      await channelRemove(props.channelId, token)
-      toast.success(i18next.t('channelDeleted'), {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
-    }
-    catch {
-      toast.error(i18next.t('connectionError'), {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      })
-    }
+  const handleRemoveChannel = () => {
+    channelRemove(props.channelId, token)
   }
 
   return (

@@ -7,7 +7,8 @@ import {
 } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import i18next from '../../../../common/locales/i18n'
-import authOff from '../../../../assets/images/authOff.jpg'
+import loginIcon from '../../../../assets/images/avatar.jpg'
+import signUpIcon from '../../../../assets/images/avatar1.jpg'
 import CommonHeader from '../../../../common/ui/CommonHeader'
 import schemas from '../../../../common/helpers/validation'
 import { handleLogin } from '../../Login/model/handlers'
@@ -17,8 +18,6 @@ const Authentication = (props) => {
   const { type } = props
 
   const [errorState, setError] = useState()
-
-  const [image, setImage] = useState(authOff)
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -43,7 +42,7 @@ const Authentication = (props) => {
         <Col className="bg-white rounded border border-secondary pt-5 shadow-sm" sm={8} lg={8}>
           <Row className="middle-form" sm={12} lg={12}>
             <Col className="middle-image justify-content-center d-flex align-items-center px-0 mx-0" sm={6} lg={6}>
-              <Image src={image} alt="login image" height="300" width="300" roundedCircle />
+              <Image src={type === 'signup' ? signUpIcon : loginIcon} alt="login image" height="300" width="300" roundedCircle />
             </Col>
             <Col className="middle-inputs px-5" sm={6} lg={6}>
               <h1 className="text-center mb-4">{type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')}</h1>
@@ -52,7 +51,7 @@ const Authentication = (props) => {
                   userName: '',
                   password: '',
                 }}
-                onSubmit={async values => (type === 'signup' ? await handleSignUp(values, navigate, setError, setImage, setIsLoading) : await handleLogin(values, navigate, setError, setImage, setIsLoading))}
+                onSubmit={async values => (type === 'signup' ? await handleSignUp(values, navigate, setError, setIsLoading) : await handleLogin(values, navigate, setError, setIsLoading))}
                 validationSchema={type === 'signup' ? schemas.signup : schemas.login}
               >
                 {() => (
