@@ -9,7 +9,7 @@ const NoAccMenu = (props) => {
 
   const navigate = useNavigate()
 
-  return type === 'signup'
+  return type === 'login'
   ? (
       <Col
         className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100"

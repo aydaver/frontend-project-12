@@ -1,13 +1,10 @@
-import { useNavigate } from 'react-router-dom'
 import { handleLogin } from '../../Login/model/handlers'
 import { handleSignUp } from '../../SignUp/model/handlers'
 
-const handleSubmit = (type, values, setError, setIsLoading) => {
-  const navigate = useNavigate()
-
+const handleSubmit = (type, navigate, values, setError, setIsLoading) => {
   return type === 'signup'
-  ? handleSignUp(navigate, values, setError, setIsLoading)
-  : handleLogin(navigate, values, setError, setIsLoading)
+  ? handleSignUp(values, navigate, setError, setIsLoading)
+  : handleLogin(values, navigate, setError, setIsLoading)
 }
 
 export default handleSubmit

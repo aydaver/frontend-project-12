@@ -13,6 +13,7 @@ import i18next from '../../../../common/locales/i18n'
 import CommonHeader from '../../../../common/ui/CommonHeader'
 import schemas from '../../../../common/helpers/validation'
 import handleTitle from '../model/handleTitle'
+import { useNavigate } from 'react-router-dom'
 
 const Authentication = (props) => {
   const { type } = props
@@ -20,6 +21,8 @@ const Authentication = (props) => {
   const [errorState, setError] = useState()
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const navigate = useNavigate()
 
   return (
     <Container className="bg-black mw-100 h-100 my-0 px-0" sm={12} lg={12}>
@@ -37,7 +40,7 @@ const Authentication = (props) => {
                   userName: '',
                   password: '',
                 }}
-                onSubmit={async values => handleSubmit(type, values, setError, setIsLoading)}
+                onSubmit={values => handleSubmit(type, navigate, values, setError, setIsLoading)}
                 validationSchema={type === 'signup' ? schemas.signup : schemas.login}
               >
                 {() => (
