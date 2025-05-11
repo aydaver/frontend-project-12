@@ -5,7 +5,7 @@ import { useState } from 'react'
 import {
   Button, Container, Row, Col, Image, Spinner,
 } from 'react-bootstrap'
-import imager from '../model/image'
+import handleImage from '../model/handleImage'
 import PasswordConfirm from './passwordConfirm'
 import NoAccMenu from './noAccMenu'
 import handleSubmit from '../model/handleSubmit'
@@ -31,7 +31,7 @@ const Authentication = (props) => {
         <Col className="bg-white rounded border border-secondary pt-5 shadow-sm" sm={8} lg={8}>
           <Row className="middle-form" sm={12} lg={12}>
             <Col className="middle-image justify-content-center d-flex align-items-center px-0 mx-0" sm={6} lg={6}>
-              <Image src={imager(type)} alt="login image" height="300" width="300" roundedCircle />
+              <Image src={handleImage(type)} alt="login image" height="300" width="300" roundedCircle />
             </Col>
             <Col className="middle-inputs px-5" sm={6} lg={6}>
               <h1 className="text-center mb-4">{handleTitle(type)}</h1>
