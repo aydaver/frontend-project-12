@@ -5,14 +5,14 @@ import { useState } from 'react'
 import {
   Button, Container, Row, Col, Image, Spinner,
 } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import imager from '../model/image'
+import PasswordConfirm from './passwordConfirm'
+import NoAccMenu from './noAccMenu'
+import handleSubmit from '../model/handleSubmit'
 import i18next from '../../../../common/locales/i18n'
-import loginIcon from '../../../../assets/images/avatar.jpg'
-import signUpIcon from '../../../../assets/images/avatar_1.jpg'
 import CommonHeader from '../../../../common/ui/CommonHeader'
 import schemas from '../../../../common/helpers/validation'
-import { handleLogin } from '../../Login/model/handlers'
-import { handleSignUp } from '../../SignUp/model/handlers'
+import handleTitle from '../model/handleTitle'
 
 const Authentication = (props) => {
   const { type } = props
@@ -21,20 +21,6 @@ const Authentication = (props) => {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  const navigate = useNavigate()
-
-  const handlePasswordCheck = () => (type === 'signup'
-    ? (
-        <div className="form-group mb-4">
-          <label htmlFor="passwordCheck" className="w-100">
-            {i18next.t('passwordConfirmFormTitle')}
-            <Field id="passwordCheck" type="password" name="passwordCheck" className="form-control" />
-          </label>
-          <Error name="passwordCheck">{error => <span className="text-danger">{error}</span>}</Error>
-        </div>
-      )
-    : null)
-
   return (
     <Container className="bg-black mw-100 h-100 my-0 px-0" sm={12} lg={12}>
       <CommonHeader />
@@ -42,16 +28,16 @@ const Authentication = (props) => {
         <Col className="bg-white rounded border border-secondary pt-5 shadow-sm" sm={8} lg={8}>
           <Row className="middle-form" sm={12} lg={12}>
             <Col className="middle-image justify-content-center d-flex align-items-center px-0 mx-0" sm={6} lg={6}>
-              <Image src={type === 'signup' ? signUpIcon : loginIcon} alt="login image" height="300" width="300" roundedCircle />
+              <Image src={imager(type)} alt="login image" height="300" width="300" roundedCircle />
             </Col>
             <Col className="middle-inputs px-5" sm={6} lg={6}>
-              <h1 className="text-center mb-4">{type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')}</h1>
+              <h1 className="text-center mb-4">{handleTitle(type)}</h1>
               <Formik
                 initialValues={{
                   userName: '',
                   password: '',
                 }}
-                onSubmit={async values => (type === 'signup' ? await handleSignUp(values, navigate, setError, setIsLoading) : await handleLogin(values, navigate, setError, setIsLoading))}
+                onSubmit={async values => handleSubmit(type, values, setError, setIsLoading)}
                 validationSchema={type === 'signup' ? schemas.signup : schemas.login}
               >
                 {() => (
@@ -72,7 +58,7 @@ const Authentication = (props) => {
                         </label>
                         <Error id="password" name="password">{error => <span className="text-danger">{error}</span>}</Error>
                       </div>
-                      {handlePasswordCheck()}
+                      <PasswordConfirm type={type} />
                       <Button type="submit" className="w-100" disabled={isLoading}>
                         {isLoading
                           ? (
@@ -87,12 +73,12 @@ const Authentication = (props) => {
                                 />
                                 {' '}
                                 {
-                                  type === 'signup' ? `${i18next.t('signupTitle')}...` : `${i18next.t('loginTitle')}...`
+                                  `${handleTitle(type)}...`
                                 }
                               </>
                             )
                           : (
-                              type === 'signup' ? i18next.t('signupTitle') : i18next.t('loginTitle')
+                              handleTitle(type)
                             )}
                       </Button>
                     </Form>
@@ -100,13 +86,7 @@ const Authentication = (props) => {
                 )}
               </Formik>
             </Col>
-            <Col
-              className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100"
-              style={{ visibility: type === 'login' ? 'visible' : 'hidden' }}
-            >
-              <p className="my-0">{i18next.t('noAccountQuestion')}</p>
-              <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate('/signup') }}>{i18next.t('signupTitle')}</Button>
-            </Col>
+            <NoAccMenu type={type} />
           </Row>
         </Col>
       </Row>
