@@ -3,7 +3,7 @@ import { connectionErrorToast, channelAddedToast, channelEditedToast, channelDel
 
 export const channelPost = async (newChannel, token) => {
   try {
-    await axios.post('/api/v1/channels', newChannel, {
+    await axios.post('/import.meta.env.VITE_API_URL/v1/channels', newChannel, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -17,7 +17,7 @@ export const channelPost = async (newChannel, token) => {
 
 export const channelEdit = async (channelId, newChannel, token) => {
   try {
-    await axios.patch(`/api/v1/channels/${channelId}`, newChannel, {
+    await axios.patch(`/import.meta.env.VITE_API_URL/v1/channels/${channelId}`, newChannel, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -31,7 +31,7 @@ export const channelEdit = async (channelId, newChannel, token) => {
 
 export const channelRemove = async (channelId, token) => {
   try {
-    await axios.delete(`/api/v1/channels/${channelId}`, {
+    await axios.delete(`/import.meta.env.VITE_API_URL/v1/channels/${channelId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

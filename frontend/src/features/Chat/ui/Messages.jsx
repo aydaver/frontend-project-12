@@ -24,7 +24,7 @@ const Messages = (props) => {
   }, [])
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('import.meta.env.VITE_API_URL')
 
     socket.on('newMessage', (payload) => {
       dispatch(addMessage(payload))

@@ -34,7 +34,7 @@ const Channels = () => {
   }, [])
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('import.meta.env.VITE_API_URL')
 
     socket.on('newChannel', (payload) => {
       dispatch(addChannel(payload))
@@ -50,7 +50,7 @@ const Channels = () => {
   }, [])
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('import.meta.env.VITE_API_URL')
 
     socket.on('removeChannel', (payload) => {
       dispatch(removeChannel(payload))
@@ -60,7 +60,7 @@ const Channels = () => {
   }, [])
 
   useEffect(() => {
-    const socket = io('ws://localhost:5001')
+    const socket = io('import.meta.env.VITE_API_URL')
 
     socket.on('renameChannel', (payload) => {
       dispatch(renameChannel(payload))

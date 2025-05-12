@@ -3,7 +3,7 @@ import { connectionErrorToast } from '../ui/additionalUI/Toasts'
 
 const messagePost = (newMessage, token) => {
   try {
-    axios.post('/api/v1/messages', newMessage, {
+    axios.post('/import.meta.env.VITE_API_URL/v1/messages', newMessage, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
