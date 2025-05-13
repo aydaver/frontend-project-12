@@ -1,6 +1,6 @@
-import { ToastContainer } from 'react-toastify'
 import Channels from './Channels'
 import ExitButton from './additionalUI/ExitButton'
+import { ToastContainer } from 'react-toastify'
 import CommonHeader from '../../../common/ui/CommonHeader'
 
 const Chat = () => (

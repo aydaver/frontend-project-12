@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify'
 import i18next from '../../../../common/locales/i18n'
+import 'react-toastify/dist/ReactToastify.css'
 
 const connectionErrorToast = () => {
   toast.error(i18next.t('connectionError'), {
