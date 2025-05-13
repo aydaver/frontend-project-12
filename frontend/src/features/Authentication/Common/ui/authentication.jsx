@@ -33,7 +33,7 @@ const Authentication = (props) => {
             <Col className="middle-image justify-content-center d-flex align-items-center px-0 mx-0" sm={6} lg={6}>
               <Image src={handleImage(type)} alt="login image" height="300" width="300" roundedCircle />
             </Col>
-            <Col className="middle-inputs px-5" sm={6} lg={6}>
+            <Col className="middle-inputs px-5 pb-5" sm={6} lg={6}>
               <h1 className="text-center mb-4">{handleTitle(type)}</h1>
               <Formik
                 initialValues={{

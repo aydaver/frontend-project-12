@@ -12,7 +12,7 @@ const NoAccMenu = (props) => {
   return type === 'login'
     ? (
         <Col
-          className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center mt-5 py-4 bg-white w-100"
+          className="rounded-bottom border-secondary border-top d-flex justify-content-md-center align-items-center py-4 bg-white w-100"
         >
           <p className="my-0">{i18next.t('noAccountQuestion')}</p>
           <Button className="my-0 pe-0 ps-2" variant="link" onClick={() => { navigate('/signup') }}>{i18next.t('signupTitle')}</Button>
